@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import React, {useEffect} from "react";
+import React from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-
+import styles from "./styles.module.css"
 
 
 
@@ -16,7 +16,6 @@ export default function LoginPage() {
         password: "",
        
     })
-    const [buttonDisabled, setButtonDisabled] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
 
@@ -25,11 +24,8 @@ export default function LoginPage() {
             setLoading(true);
             const response = await axios.post("/api/users/login", user);
             console.log("Login success", response.data);
-    
-            // Перенаправление на домашнюю страницу или другую страницу после успешного входа
-            console.log("Before redirect");
-            router.push("/login");
-            console.log("After redirect");
+            toast.success("Login success")
+            router.push("/profile");
 
         } catch (error: any) {
             console.log("Login failed", error.message);
@@ -39,16 +35,12 @@ export default function LoginPage() {
         }
     };
 
-    useEffect(() => {
-        if(user.email.length > 0 && user.password.length > 0) {
-            setButtonDisabled(false);
-        } else{
-            setButtonDisabled(true);
-        }
-    }, [user]);
+    const isFormValid = () => {
+        return user.email !== '' && user.password !== '';
+      };
 
     return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className={styles.container}>
         <h1>{loading ? "Processing" : "Login"}</h1>
         <hr />
         
@@ -72,7 +64,9 @@ export default function LoginPage() {
             />
             <button
             onClick={onLogin}
-            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">Login here</button>
+            className={`${styles.btn} ${isFormValid() ? '' : styles.disabled}`}
+                                    disabled={!isFormValid()}
+            >Login here</button>
             <Link href="/signup">Visit Signup page</Link>
         </div>
     )
