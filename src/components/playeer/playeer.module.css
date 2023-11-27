@@ -1,0 +1,387 @@
+
+
+.media_section {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    padding: 20px;
+    align-items: start;
+    width: 100%;
+    background-image: linear-gradient(to right,
+                       rgba(0, 0, 0, 0.0),
+                       rgba(0, 0, 0, 0.2), 
+                       rgba(0, 0, 0, 0.3),
+                       rgba(0, 0, 0, 0.2),
+                        rgba(0, 0, 0, 0.0));
+  }
+
+  .title {
+    margin: 0;
+    color: white;
+    font-size: 52px;
+    letter-spacing: 2px;
+    z-index: 1;
+    text-align: center;
+  }
+
+.vol {
+font-size: 28px;
+cursor: pointer;
+}
+
+.player {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    gap: 1.6rem;
+    padding: 10px;
+    z-index: 1;
+    height: 150px;
+}
+
+.volume {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+
+.timeLeftContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 135px;
+  left: 43%;
+  gap: .5rem;
+}
+
+.remainingTime {
+  color:rgb(255, 212, 133);
+}
+
+.timer {
+    color: white;
+    font-size: 22px;
+}
+
+.play {
+    background: transparent;
+    color: white;
+    font-size: 62px;
+    cursor: pointer;
+}
+
+
+
+.volume-slider {
+    width: 100px;
+    margin: 0 10px;
+    accent-color: #ffffff;
+}
+
+.timer {
+    font-size: 28px;
+}
+
+.cancelButton ,  .playButton {
+    background-color: transparent;
+    border: none;
+}
+
+
+.forLabel {
+    white-space: nowrap;
+    font-size: 14px;
+    color: rgb(255, 212, 133);
+
+}
+
+.spanOr {
+    color: rgb(255, 212, 133);
+font-size: 18px;
+
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    /* Установите фиксированную высоту */
+}
+
+.clockIcon {
+    font-size: 34px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.iconClicked {
+  color: rgb(255, 212, 133);
+  transform: scale(1.2);
+}
+
+.timePickerContainer{
+    position: fixed;
+    border-radius: 5px;
+    display: flex;
+    background-color: #1c1c1c;
+    padding: 30px;
+  flex-direction: column;
+    left: 45%;
+    top: 35%;
+    gap: .7rem;
+    transition: 1s;
+}
+
+.pickers {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+
+.afterTime, .afterDur {
+    display: flex;
+    flex-direction: column;
+}
+
+.afterTimeContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.startBtn {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.timeList {
+    height: 40px; /* Ограничиваем максимальную высоту */
+    overflow: auto;
+    list-style: none;
+    font-size: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent; /* Цвет фона */
+    border: 1px solid #ccc; /* Граница */
+    padding: 8px; /* Отступы вокруг текста */
+    border-radius: 4px; /* Закругленные углы */
+    font-size: 16px; /* Размер шрифта */
+    width: 110px;
+    color: #f9f9f9; /* Цвет текста */
+}
+
+
+.select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent; /* Цвет фона */
+    border: 1px solid #ccc; /* Граница */
+    padding: 8px; /* Отступы вокруг текста */
+    border-radius: 4px; /* Закругленные углы */
+    font-size: 16px; /* Размер шрифта */
+    width: 110px;
+    color: #f9f9f9; /* Цвет текста */
+  }
+  
+  /* Стили при наведении курсора */
+  .timeList:hover {
+    background-color: transparent;
+    border-color: #666; /* Изменение цвета границы при наведении */
+  }
+  
+  /* Стили при фокусе (когда элемент активен) */
+  .timeList:focus {
+    outline: none; /* Убираем стандартное выделение при фокусе */
+    border-color: #0099cc; /* Цвет границы при фокусе */
+    box-shadow: 0 0 5px #0099cc; /* Тень при фокусе */
+    background: #666;
+  }
+
+
+
+  .timeInput {
+    height: 40px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent; /* Цвет фона */
+    border: 1px solid #ccc; /* Граница */
+    padding: 8px; /* Отступы вокруг текста */
+    border-radius: 4px; /* Закругленные углы */
+    font-size: 16px; /* Размер шрифта */
+    width: 110px;
+    color: #f9f9f9; /* Цвет текста */
+  }
+
+  .timeInput:hover {
+    background-color: transparent;
+    border-color: #666; /* Изменение цвета границы при наведении */
+  }
+  
+  /* Стили при фокусе (когда элемент активен) */
+  .timeInput:focus {
+    outline: none; /* Убираем стандартное выделение при фокусе */
+    border-color: #0099cc; /* Цвет границы при фокусе */
+    box-shadow: 0 0 5px #0099cc; /* Тень при фокусе */
+    background: #666;
+  }
+
+
+
+@media (max-width: 844px) { 
+    .media_section {
+        bottom: 0;
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+        align-items: center;
+        background: cover;
+        padding: 0px;
+        padding-top: 10px;
+        width: 100%;
+        background-image: linear-gradient(to right,
+                           rgba(0, 0, 0, 0.8),
+                           rgba(0, 0, 0, 0.9),
+                           rgba(0, 0, 0, 1), 
+                           rgba(0, 0, 0, 1),
+                           rgba(0, 0, 0, 1),
+                            rgba(0, 0, 0, 0.9),
+                            rgba(0, 0, 0, 0.8));
+      }
+
+      
+.player {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    gap: 1.6rem;
+    padding: 10px;
+    z-index: 1;
+    height: 150px;
+}
+
+
+      .timePickerContainer{
+        position: absolute;
+        display: flex;
+      flex-direction: column;
+        left:-300px;
+        top: -260px;
+        gap: .7rem;
+        background-color: #1c1c1c;
+        padding: 30px;
+        border-radius: 5px;
+        
+    }
+    
+    .pickers {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 1rem;
+    }
+    
+    .afterTime, .afterDur {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .timeList {
+        height: 40px; /* Ограничиваем максимальную высоту */
+        overflow: auto;
+        list-style: none;
+        font-size: 14px;
+    }
+    
+    
+    .select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: transparent; /* Цвет фона */
+        border: 1px solid #ccc; /* Граница */
+        padding: 8px; /* Отступы вокруг текста */
+        border-radius: 4px; /* Закругленные углы */
+        font-size: 16px; /* Размер шрифта */
+        width: 110px;
+        color: #f9f9f9; /* Цвет текста */
+      }
+      
+      /* Стили при наведении курсора */
+      .select:hover {
+        background-color: transparent;
+        border-color: #666; /* Изменение цвета границы при наведении */
+      }
+      
+      /* Стили при фокусе (когда элемент активен) */
+      .select:focus {
+        outline: none; /* Убираем стандартное выделение при фокусе */
+        border-color: #0099cc; /* Цвет границы при фокусе */
+        box-shadow: 0 0 5px #0099cc; /* Тень при фокусе */
+        background: #666;
+      }
+    
+
+      .timeLeftContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 110px;
+        width: 100%;
+        left: 0;
+        gap: .5rem;
+      }
+      
+      .remainingTime {
+        color:rgb(255, 212, 133);
+      }
+    
+    
+      .timeInput {
+        height: 40px;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: transparent; /* Цвет фона */
+        border: 1px solid #ccc; /* Граница */
+        padding: 8px; /* Отступы вокруг текста */
+        border-radius: 4px; /* Закругленные углы */
+        font-size: 16px; /* Размер шрифта */
+        width: 110px;
+        color: #f9f9f9; /* Цвет текста */
+      }
+    
+      .timeInput:hover {
+        background-color: transparent;
+        border-color: #666; /* Изменение цвета границы при наведении */
+      }
+      
+      /* Стили при фокусе (когда элемент активен) */
+      .timeInput:focus {
+        outline: none; /* Убираем стандартное выделение при фокусе */
+        border-color: #0099cc; /* Цвет границы при фокусе */
+        box-shadow: 0 0 5px #0099cc; /* Тень при фокусе */
+        background: #666;
+      }
+    
+      .clock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        position:none;
+        /* Установите фиксированную высоту */
+    }
+    
+
+}

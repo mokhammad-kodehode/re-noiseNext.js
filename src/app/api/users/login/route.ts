@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+
 connect()
 
 export async function POST(request: NextRequest){
@@ -48,6 +49,7 @@ export async function POST(request: NextRequest){
         return response;
 
     } catch (error: any) {
+        console.error('Error:', error);
         return NextResponse.json({error: error.message}, {status: 500})
     }
 }
