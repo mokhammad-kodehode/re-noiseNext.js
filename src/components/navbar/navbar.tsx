@@ -6,10 +6,7 @@ const Navbar: React.FC = () => {
   return (
     <header>
       <nav className={styles.navbar}>
-        <a className={styles.logo}
-         href="#">
-          <Link href="/" >ReNoise</Link>
-          </a>
+          <Link className={styles.logo} href="/" >ReNoise</Link>
         <ul className={styles.items}>
             <li className={styles.item}>About Us</li>
             <li className={styles.nav_item}>

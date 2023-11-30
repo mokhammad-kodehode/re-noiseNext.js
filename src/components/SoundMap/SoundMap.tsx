@@ -10,7 +10,10 @@ const RelaxSoundsMap: React.FC = () => {
   const [audioPlayers, setAudioPlayers] = useState<Record<string, HTMLAudioElement>>({});
   const [activeSounds, setActiveSounds] = useState<string[]>([]);
   const [savedSounds, setSavedSounds] = useState<string[]>([]);
+  const [selectedSound, setSelectedSound] = useState<SoundData | null>(null);
   
+
+
 
   const stopAllSounds = () => {
     activeSounds.forEach((title) => {
@@ -19,8 +22,11 @@ const RelaxSoundsMap: React.FC = () => {
       audioPlayer.currentTime = 0;
     });
     setActiveSounds([]); 
+    setSelectedSound(null);
     console.log('All sounds stopped');// Очищаем список активных звуков
   };
+
+  
 
   const handleSoundClick = (sound: SoundData) => {
     const audioPlayer = audioPlayers[sound.title] || new Audio(sound.soundSource);
@@ -42,6 +48,8 @@ const RelaxSoundsMap: React.FC = () => {
     }));
 
     console.log(`Play/Stop: ${sound.title}`);
+
+    setSelectedSound(sound);
   };
 
   const handlePlayPause = () => {
@@ -135,6 +143,7 @@ const RelaxSoundsMap: React.FC = () => {
       handleVolumeChangeAll={handleVolumeChangeAll}
       handleMuteAll={handleMuteAll}
       stopAllSounds={stopAllSounds}
+      selectedSound={selectedSound}
        />
        
     </div>

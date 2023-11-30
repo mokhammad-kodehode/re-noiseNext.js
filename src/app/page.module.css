@@ -1,3 +1,121 @@
+
+.conatiner_main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0F2D49;
+  width: 100%;
+  height: 650px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  gap: 1rem;
+}
+
+
+
+.title_name {
+  display: flex;
+   font-size: 64px;
+   font-weight: 500;
+   margin: 0;
+   width: 100%;
+   white-space: nowrap;
+}
+
+.descp {
+  font-weight: 200;
+}
+
+.btn{
+  display: flex;
+width: 150px;
+height: 50px;
+padding: 10px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-shrink: 0;
+border: none;
+border-radius: 53px;
+cursor: pointer;
+background: var(--Relax-color, #3a81be);
+transition: .5s;
+font-size: 16px;
+}
+
+.btn:hover{
+  transform: scale(1.1);
+}
+
+.img_section {
+  display: flex;
+  position: relative;
+  width: 750px;
+}
+
+.img_moon{
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  width: 100%;
+  height: 650px;
+  background-image: url("../../public/Moon.jpg");
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: -31px center;
+  margin: 0;
+  z-index: 1;
+  transition: 1s;
+}
+
+
+.img_moon:hover{
+  background-position: -21px center;
+}
+
+
+
+
+.img_rain{
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  width: 100%;
+  height: 650px;
+  background-image: url("../../public/Rain.jpg");
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: cover;
+  position: absolute;
+  left: 32%;
+  z-index: 2;
+  transition: 1s;
+}
+
+.img_rain:hover{
+  background-position: -21px center;
+}
+
+
+.img_ocean{
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  width: 100%;
+  height: 650px;
+  background-image: url("../../public/Ocean.jpg");
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: cover;
+  position: absolute;
+  left: 70%;
+  z-index: 3;
+  transition: 1s;
+}
+
+.img_ocean:hover{
+  background-position: -21px center;
+}
+
 .main {
   display: flex;
   flex-direction: column;

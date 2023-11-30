@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 import styles from './playeer.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock, faVault } from '@fortawesome/free-solid-svg-icons';
+import {faVolumeOff,faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock, faVault } from '@fortawesome/free-solid-svg-icons';
+import { SoundData } from '../../data/soundData';
 
 interface PlayeerProps {
   isPlaying: boolean;
@@ -9,20 +10,61 @@ interface PlayeerProps {
   handleVolumeChangeAll: (volume:number) => void;
   handleMuteAll: () => void;
   stopAllSounds: () => void;
+  selectedSound: SoundData | null;
 }
 
-const Playeer: React.FC<PlayeerProps> = ({ isPlaying, handlePlayPause, handleVolumeChangeAll, handleMuteAll,  stopAllSounds }) => {
-      const [isMuted, setIsMuted] = useState(false)
+const Playeer: React.FC<PlayeerProps> = (
+  {selectedSound, 
+    isPlaying, 
+    handlePlayPause, 
+    handleVolumeChangeAll,
+    handleMuteAll,  
+    stopAllSounds
+   }) => {
+    
+  
+  const [isMuted, setIsMuted] = useState(false)
       const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
       const [selectedTime, setSelectedTime] = useState('');
       const [remainingTime, setRemainingTime] = useState<number>(0);
       const [isTimerRunning, setIsTimerRunning] = useState(false);
       const [timerIntervalId, setTimerIntervalId] = useState<number | NodeJS.Timeout | null>(null);
-      const [isMixesCreatorOpen, setIsMixesCreatorOpen] = useState(false);
+  
+
+      //Timer
+
+      const startTimerAtTime = (time: string) => {
+        const now = new Date();
+        const [hours, minutes] = time.split(':').map(Number);
+        const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
       
+        if (targetTime <= now) {
+          targetTime.setDate(targetTime.getDate() + 1); // Если выбранное время уже прошло, то устанавливаем его на следующий день
+        }
       
-      const toggleMixesCreator = () => {
-        setIsMixesCreatorOpen(!isMixesCreatorOpen);
+        const timeDifference = targetTime.getTime() - now.getTime();
+      
+        setRemainingTime(Math.floor(timeDifference / 1000)); // Устанавливаем оставшееся время в секундах
+      
+        setIsTimerRunning(true);
+      
+        const intervalId = setInterval(() => {
+          console.log(`Timer is running. Remaining time: ${Math.floor(remainingTime / 60)} minutes ${remainingTime % 60} seconds`);
+      
+          setRemainingTime((prevRemainingTime) => {
+            if (prevRemainingTime > 0) {
+              return prevRemainingTime - 1;
+            } else {
+              clearInterval(intervalId);
+              stopAllSounds();
+              setIsTimerRunning(false);
+              setTimerIntervalId(null);
+              return 0;
+            }
+          });
+        }, 1000);
+      
+        setTimerIntervalId(intervalId);
       };
 
       const toggleTimePicker = () => {
@@ -61,13 +103,15 @@ const Playeer: React.FC<PlayeerProps> = ({ isPlaying, handlePlayPause, handleVol
       
       
       const cancelTimer = () => {
-        if (timerIntervalId && typeof timerIntervalId === 'number') {
-          clearInterval(timerIntervalId);
+        if (timerIntervalId !== null) {
+          clearInterval(timerIntervalId as number);
           setRemainingTime(0);
           setIsTimerRunning(false);
           setTimerIntervalId(null);
         }
       };
+
+      //Play and Volume
 
         const handlePlayPauseClick = () => {
           console.log('Before handlePlayPause:', isPlaying);
@@ -90,50 +134,13 @@ const Playeer: React.FC<PlayeerProps> = ({ isPlaying, handlePlayPause, handleVol
           setIsMuted(!isMuted);
         };
 
-        // const startTimer = (time: number) => {
-        //   console.log(`Timer started for ${time} minutes`);
-        //   setTimeout(() => {
-        //     stopAllSounds(); // Останавливаем звуки по истечении времени
-        //     console.log(`Timer ended after ${time} minutes`);
-        //   }, time * 60 * 1000); // Переводим время из минут в миллисекунды
-        // };
-        
-        const startTimerAtTime = (time: string) => {
-          const now = new Date();
-          const [hours, minutes] = time.split(':').map(Number);
-          const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
-        
-          if (targetTime <= now) {
-            targetTime.setDate(targetTime.getDate() + 1); // Если выбранное время уже прошло, то устанавливаем его на следующий день
-          }
-        
-          const timeDifference = targetTime.getTime() - now.getTime();
-        
-          setRemainingTime(Math.floor(timeDifference / 1000)); // Устанавливаем оставшееся время в секундах
-        
-          setIsTimerRunning(true);
-        
-          const intervalId = setInterval(() => {
-            console.log(`Timer is running. Remaining time: ${Math.floor(remainingTime / 60)} minutes ${remainingTime % 60} seconds`);
-        
-            setRemainingTime((prevRemainingTime) => {
-              if (prevRemainingTime > 0) {
-                return prevRemainingTime - 1;
-              } else {
-                clearInterval(intervalId);
-                stopAllSounds();
-                setIsTimerRunning(false);
-                setTimerIntervalId(null);
-                return 0;
-              }
-            });
-          }, 1000);
-        
-          setTimerIntervalId(intervalId);
-        };
+
 
   return (
     <div className={`${styles.media_section} ${isPlaying ? styles.show : ''}`}>
+      {selectedSound && isPlaying && (
+        <h1 className={styles.title}>{selectedSound.title}</h1>
+      )}
       <div className={styles.player}>
           <div className={styles.timeLeftContainer}>
                   {remainingTime > 0 && (
@@ -147,10 +154,16 @@ const Playeer: React.FC<PlayeerProps> = ({ isPlaying, handlePlayPause, handleVol
                       </button>
                     )}
               </div>
-        <button className={styles.playButton} onClick={handlePlayPauseClick}>
+          <button className={styles.playButton} onClick={handlePlayPauseClick}>
           <FontAwesomeIcon icon={isPlaying ? faPause : faCirclePlay} className={styles.play} />
         </button>
         <div className={styles.volume}>
+        <FontAwesomeIcon
+            icon={faVolumeOff}
+            className={styles.vol}
+            onClick={handleMuteClick}
+            
+             />
           <input 
             className={styles.volumeSlider} 
             type="range" 
@@ -162,7 +175,6 @@ const Playeer: React.FC<PlayeerProps> = ({ isPlaying, handlePlayPause, handleVol
             icon={isMuted ? faVolumeMute : faVolumeUp}
             className={styles.vol}
             onClick={handleMuteClick}
-            
              />
            </div>
            <div className={styles.clock}>
@@ -206,7 +218,7 @@ const Playeer: React.FC<PlayeerProps> = ({ isPlaying, handlePlayPause, handleVol
                       </div>
                     ) : null}
             </div>
-            <FontAwesomeIcon className={styles.mixIcon} icon={faVault} onClick={toggleMixesCreator}  />
+            {/* <FontAwesomeIcon className={styles.mixIcon} icon={faVault} /> */}
       </div>
     </div>
   );
