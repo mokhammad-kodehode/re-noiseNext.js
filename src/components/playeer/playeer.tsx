@@ -3,6 +3,7 @@ import styles from './playeer.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faVolumeOff,faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock, faVault } from '@fortawesome/free-solid-svg-icons';
 import { SoundData } from '../../data/soundData';
+// import SavedMixes from '../mixes/mixes';
 
 interface PlayeerProps {
   isPlaying: boolean;
@@ -10,16 +11,26 @@ interface PlayeerProps {
   handleVolumeChangeAll: (volume:number) => void;
   handleMuteAll: () => void;
   stopAllSounds: () => void;
-  selectedSound: SoundData | null;
+  // selectedSound: SoundData | null;
+  // selectedMixIndex: number | null;  // Добавлено
+  // setSelectedMixIndex: (index: number) => void;
+  // handlePlaySavedMix: (mixIndex: number) => void
+}
+
+interface SavedMix {
+  name: string;
+  sounds: string[];
 }
 
 const Playeer: React.FC<PlayeerProps> = (
-  {selectedSound, 
+  {
     isPlaying, 
     handlePlayPause, 
     handleVolumeChangeAll,
     handleMuteAll,  
-    stopAllSounds
+    stopAllSounds,
+    // selectedMixIndex,  // Добавлено
+    // handlePlaySavedMix
    }) => {
     
   
@@ -29,9 +40,16 @@ const Playeer: React.FC<PlayeerProps> = (
       const [remainingTime, setRemainingTime] = useState<number>(0);
       const [isTimerRunning, setIsTimerRunning] = useState(false);
       const [timerIntervalId, setTimerIntervalId] = useState<number | NodeJS.Timeout | null>(null);
-  
+      // const [isMixPanelOpen, setIsMixPanelOpen] = useState(false);
 
-      //Timer
+      // const handleMixPanelOpen = () => {
+      //   // Toggle the state to open/close the Playeer component
+      //   if (selectedMixIndex !== null) {
+      //     setIsMixPanelOpen(!isMixPanelOpen);
+      //   }
+      // };
+
+      
 
       const startTimerAtTime = (time: string) => {
         const now = new Date();
@@ -138,9 +156,9 @@ const Playeer: React.FC<PlayeerProps> = (
 
   return (
     <div className={`${styles.media_section} ${isPlaying ? styles.show : ''}`}>
-      {selectedSound && isPlaying && (
+      {/* {selectedSound && isPlaying && (
         <h1 className={styles.title}>{selectedSound.title}</h1>
-      )}
+      )} */}
       <div className={styles.player}>
           <div className={styles.timeLeftContainer}>
                   {remainingTime > 0 && (
@@ -218,7 +236,8 @@ const Playeer: React.FC<PlayeerProps> = (
                       </div>
                     ) : null}
             </div>
-            {/* <FontAwesomeIcon className={styles.mixIcon} icon={faVault} /> */}
+            {/* <FontAwesomeIcon className={styles.mixIcon} icon={faVault} onClick={handleMixPanelOpen} />
+            {isMixPanelOpen && <SavedMixes onPlaySavedMix={handlePlaySavedMix} />} */}
       </div>
     </div>
   );

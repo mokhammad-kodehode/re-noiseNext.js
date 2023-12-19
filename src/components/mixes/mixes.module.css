@@ -1,0 +1,42 @@
+.mixContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  position:fixed;
+  top: 20%;
+  left: 35%;
+  background-color: #1c1c1c;
+  padding: 20px;
+  border-radius: 5px;
+  width: 500px;
+  height: 400px;
+}
+
+
+.mixContainerForm {
+    display: flex;
+    gap: 1rem;
+}
+
+.MyMixList {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.mixList {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #4e4e4e;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.MyMixListTitle {
+    align-self: center;
+}

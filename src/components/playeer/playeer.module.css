@@ -164,6 +164,8 @@ gap: 1rem;
 .startBtn {
   margin-top: 20px;
   font-size: 18px;
+  background: none;
+  border: none;
 }
 
 .timeList {
