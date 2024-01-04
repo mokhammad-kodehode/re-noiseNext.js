@@ -19,84 +19,109 @@ const RelaxSoundsMap: React.FC = () => {
   const [mixName, setMixName] = useState<string>('');
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [activeMix, setActiveMix] = useState<string | null>(null);;
+  const [isMixesContainerOpen, setIsMixesContainerOpen] = useState(false);
+
+  const toggleMixesContainer = () => {
+    setIsMixesContainerOpen(!isMixesContainerOpen);
+  };
+
+  
   
   useEffect(() => {
-    // При монтировании компонента загрузите сохраненные миксы из локального хранилища
-    const mixes = JSON.parse(localStorage.getItem('mixes') || '[]') as MixData[];
-    const mixNames = mixes.map((mix) => mix.mixName);
-    setSavedMixes(mixNames);
+    try {
+      const storedMixes = localStorage.getItem('mixes');
+      const mixes = storedMixes ? JSON.parse(storedMixes) as MixData[] : [];
+      const mixNames = mixes.map(mix => mix.mixName);
+      setSavedMixes(mixNames);
+    } catch (error) {
+      console.error("Ошибка при загрузке миксов: ", error);
+      // Дополнительные действия при ошибке, например, уведомление пользователя
+    }
   }, []);
 
-  // Обработчик изменения имени микса
   const handleMixNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMixName(event.target.value);
   };
 
   // Сохранение текущего микса в локальное хранилище
   const saveMix = () => {
-    const mixToSave = {
-      mixName,
-      activeSounds,
-      volumes: Object.fromEntries(
-        activeSounds.map((title) => [title, audioPlayers[title]?.volume || 0])
-      ),
-    };
+    try {
+      const mixToSave = {
+        mixName,
+        activeSounds,
+        volumes: Object.fromEntries(
+          activeSounds.map((title) => [title, audioPlayers[title]?.volume || 0])
+        ),
+      };
 
-    // Сохранение микса в локальное хранилище
-    const mixes = JSON.parse(localStorage.getItem('mixes') || '[]');
-    mixes.push(mixToSave);
-    localStorage.setItem('mixes', JSON.stringify(mixes));
+      const storedMixes = localStorage.getItem('mixes');
+      const mixes = storedMixes ? JSON.parse(storedMixes) as MixData[] : [];
+      mixes.push(mixToSave);
+      localStorage.setItem('mixes', JSON.stringify(mixes));
 
-    // Обновление списка сохраненных миксов
-    setSavedMixes((prevSavedMixes) => [...prevSavedMixes, mixToSave.mixName]);
-  };
-
-  // Загрузка сохраненного микса из локального хранилища
-  const loadMix = (mixName: string) => {
-    const mixes = JSON.parse(localStorage.getItem('mixes') || '[]') as MixData[];
-    const mixToLoad = mixes.find((mix) => mix.mixName === mixName);
-  
-    if (mixToLoad) {
-      // Остановка всех текущих звуков
-      stopAllSounds();
-  
-      // Загрузка сохраненного микса
-      setActiveSounds(mixToLoad.activeSounds);
-  
-      // Установка громкости для каждого звука в миксе
-      mixToLoad.activeSounds.forEach((title) => {
-        const audioPlayer = audioPlayers[title];
-  
-        // Проверка, что audioPlayer существует и имеет метод play
-        if (audioPlayer && typeof audioPlayer.play === 'function') {
-          audioPlayer.volume = mixToLoad.volumes[title] || 0;
-        }
-      });
-  
-      // Воспроизведение звуков в миксе
-      mixToLoad.activeSounds.forEach((title) => {
-        const audioPlayer = audioPlayers[title];
-  
-        // Проверка, что audioPlayer существует и имеет метод play
-        if (audioPlayer && typeof audioPlayer.play === 'function') {
-          audioPlayer.play();
-        }
-      });
+      setSavedMixes((prevSavedMixes) => [...prevSavedMixes, mixToSave.mixName]);
+    } catch (error) {
+      console.error("Ошибка при сохранении микса: ", error);
+      // Дополнительные действия при ошибке
     }
   };
 
-
-
-  // Удаление сохраненного микса
-  const deleteMix = (mixName: string) => {
-    const updatedMixes = savedMixes.filter((name) => name !== mixName);
-    setSavedMixes(updatedMixes);
+  const loadMix = (mixName: string) => {
+    try {
+      const storedMixes = localStorage.getItem('mixes');
+      const mixes = storedMixes ? JSON.parse(storedMixes) as MixData[] : [];
+      const mixToLoad = mixes.find(mix => mix.mixName === mixName);
   
-    // Удаление микса из локального хранилища
-    const mixes = JSON.parse(localStorage.getItem('mixes') || '[]') as { mixName: string }[];
-    const updatedMixesData = mixes.filter((mix) => mix.mixName !== mixName);
-    localStorage.setItem('mixes', JSON.stringify(updatedMixesData));
+      if (mixToLoad) {
+        stopAllSounds();
+        setActiveSounds(mixToLoad.activeSounds);
+  
+        mixToLoad.activeSounds.forEach(title => {
+          // Находим соответствующий звук в soundsData по его заголовку
+          const soundData = Object.values(soundsData).find(sound => sound.title === title);
+      
+          if (soundData) {
+            let audioPlayer = audioPlayers[title];
+      
+            if (!audioPlayer) {
+              // Создаем новый аудиоплеер
+              audioPlayer = new Audio(soundData.soundSource);
+              audioPlayer.loop = true;
+              setAudioPlayers(prevAudioPlayers => ({
+                ...prevAudioPlayers,
+                [title]: audioPlayer
+              }));
+            }
+      
+            // Установка громкости и воспроизведение
+            audioPlayer.volume = mixToLoad.volumes[title] || 0;
+            audioPlayer.play();
+          } else {
+            console.error(`Звук с названием "${title}" отсутствует в данных`);
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Ошибка при загрузке микса: ", error);
+      // Дополнительные действия при ошибке
+    }
   };
+
+// Удаление сохраненного микса
+const deleteMix = (mixName: string) => {
+  try {
+    const updatedMixes = savedMixes.filter(name => name !== mixName);
+    setSavedMixes(updatedMixes);
+
+    const storedMixes = localStorage.getItem('mixes');
+    const mixes = storedMixes ? JSON.parse(storedMixes) as MixData[] : [];
+    const updatedMixesData = mixes.filter(mix => mix.mixName !== mixName);
+    localStorage.setItem('mixes', JSON.stringify(updatedMixesData));
+  } catch (error) {
+    console.error("Ошибка при удалении микса: ", error);
+    // Дополнительные действия при ошибке
+  }
+};
   
 
 const stopAllSounds = () => {
@@ -220,26 +245,28 @@ const stopAllSounds = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Relax Sounds</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Text name of mixe"
-          value={mixName}
-          onChange={handleMixNameChange}
-        />
-        <button onClick={saveMix}>Save mix</button>
-      </div>
-      <div>
-        <p>Saves mixes:</p>
-        {savedMixes.map((mixName) => (
-          // Изменено: Переключение воспроизведения/остановки при нажатии на название микса
-          <div key={mixName} onClick={() => toggleMix(mixName)} style={{ cursor: 'pointer' }}>
-            {mixName}
-            {/* Добавлено: Кнопка удаления микса */}
-            <button onClick={() => deleteMix(mixName)}>Remove</button>
-          </div>
-        ))}
-      </div>
+        {isMixesContainerOpen && <div className={styles.container_mixes}>
+            <div className={styles.container_mixes_save}>
+                <input
+                  type="text"
+                  placeholder="Text name of mixe"
+                  value={mixName}
+                  onChange={handleMixNameChange}
+                  className={styles.container_mixes_input}
+                />
+                <button className={styles.container_mixes_btn} onClick={saveMix}>Save mix</button>
+            </div>
+            <div className={styles.container_my_mixes}>
+              <p>My mixes</p>
+              {savedMixes.map((mixName) => (
+                // Изменено: Переключение воспроизведения/остановки при нажатии на название микса
+                <div key={mixName} onClick={() => toggleMix(mixName)} className={styles.mix_play}>
+                  {mixName}
+                  <button onClick={() => deleteMix(mixName)}>Remove</button>
+                </div>
+              ))}
+            </div>
+        </div>}
       <ul className={styles.sound_map}>
       {Object.keys(soundsData).map((key) => {
           const sound = soundsData[key];
@@ -272,6 +299,8 @@ const stopAllSounds = () => {
       handleVolumeChangeAll={handleVolumeChangeAll}
       handleMuteAll={handleMuteAll}
       stopAllSounds={stopAllSounds}
+      onIconClick={toggleMixesContainer}
+
       // selectedSound={selectedSound}
        />
        

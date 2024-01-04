@@ -11,6 +11,7 @@ interface PlayeerProps {
   handleVolumeChangeAll: (volume:number) => void;
   handleMuteAll: () => void;
   stopAllSounds: () => void;
+  onIconClick: () => void;
   // selectedSound: SoundData | null;
   // selectedMixIndex: number | null;  // Добавлено
   // setSelectedMixIndex: (index: number) => void;
@@ -29,6 +30,7 @@ const Playeer: React.FC<PlayeerProps> = (
     handleVolumeChangeAll,
     handleMuteAll,  
     stopAllSounds,
+    onIconClick,
     // selectedMixIndex,  // Добавлено
     // handlePlaySavedMix
    }) => {
@@ -236,8 +238,7 @@ const Playeer: React.FC<PlayeerProps> = (
                       </div>
                     ) : null}
             </div>
-            {/* <FontAwesomeIcon className={styles.mixIcon} icon={faVault} onClick={handleMixPanelOpen} />
-            {isMixPanelOpen && <SavedMixes onPlaySavedMix={handlePlaySavedMix} />} */}
+            <FontAwesomeIcon className={styles.mixIcon} icon={faVault} onClick={onIconClick} />
       </div>
     </div>
   );
