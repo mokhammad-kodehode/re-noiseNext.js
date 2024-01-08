@@ -5,12 +5,12 @@
     border-radius: 5px;
     position: fixed;
     bottom: 0;
-    height: 80px; /* Фиксированная высота */
+    height: 70px; /* Фиксированная высота */
     flex-direction: column;
     z-index: 1;
     align-items: center;
     justify-content: center;
-    width: 450px;
+    width: 100%;
     background-color: #1c1c1c;
     /* background-image: linear-gradient(to right,
                        rgba(0, 0, 0, 0.0),
@@ -31,8 +31,18 @@
     margin: auto;
   }
 
+  .mixName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  width: 200px;
+    font-size: 18px;
+    font-weight: 300;
+    
+ }
+
 .vol {
-font-size: 16px;
+font-size: 12px;
 cursor: pointer;
 }
 
@@ -44,6 +54,7 @@ cursor: pointer;
     z-index: 1;
     height: 50px;
     width: 650px;
+    
 }
 
 .volume {
@@ -81,14 +92,15 @@ cursor: pointer;
     color: white;
     font-size: 38px;
     cursor: pointer;
+    width: 40px;
 }
 
 
 
-.volume-slider {
+.volumeSlider {
     width: 100px;
-    margin: 0 10px;
     accent-color: #ffffff;
+    height: 6px;
 }
 
 .timer {
@@ -124,9 +136,15 @@ font-size: 18px;
 }
 
 .clockIcon {
-    font-size: 32px;
+    font-size: 28px;
     cursor: pointer;
     transition: .2s;
+}
+
+.mixIcon {
+  font-size: 22px;
+  cursor: pointer;
+  transition: .2s;
 }
 
 .iconClicked {

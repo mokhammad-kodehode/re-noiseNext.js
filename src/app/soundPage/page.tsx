@@ -66,6 +66,13 @@ const RelaxSoundsMap: React.FC = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    // Проверка нажатия клавиши Enter
+    if (event.key === 'Enter') {
+      saveMix();
+    }
+  };
+
   const loadMix = (mixName: string) => {
     try {
       const storedMixes = localStorage.getItem('mixes');
@@ -253,16 +260,16 @@ const stopAllSounds = () => {
                   value={mixName}
                   onChange={handleMixNameChange}
                   className={styles.container_mixes_input}
+                  onKeyDown={handleKeyPress}
                 />
                 <button className={styles.container_mixes_btn} onClick={saveMix}>Save mix</button>
             </div>
             <div className={styles.container_my_mixes}>
-              <p>My mixes</p>
               {savedMixes.map((mixName) => (
                 // Изменено: Переключение воспроизведения/остановки при нажатии на название микса
                 <div key={mixName} onClick={() => toggleMix(mixName)} className={styles.mix_play}>
                   {mixName}
-                  <button onClick={() => deleteMix(mixName)}>Remove</button>
+                  <button className={styles.remove_btn} onClick={() => deleteMix(mixName)}>Remove</button>
                 </div>
               ))}
             </div>
@@ -300,7 +307,7 @@ const stopAllSounds = () => {
       handleMuteAll={handleMuteAll}
       stopAllSounds={stopAllSounds}
       onIconClick={toggleMixesContainer}
-
+      mixName={activeMix}
       // selectedSound={selectedSound}
        />
        

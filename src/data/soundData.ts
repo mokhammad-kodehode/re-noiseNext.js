@@ -16,7 +16,8 @@ import {
         faCity,
         faTreeCity,
         faWind,
-        faClock
+        faClock,
+        faVolcano,
       } from '@fortawesome/free-solid-svg-icons';
 
 export interface SoundData {
@@ -174,6 +175,34 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faClock,
+      },
+      sova: {
+        title: "Sova",
+        soundSource: "sounds/Sova.mp3",
+        videoSource: "Video/sea.mov",
+        imageSource: "images/sea.jpg",
+        icon: faClock,
+      },
+      magma: {
+        title: "Magma",
+        soundSource: "sounds/magma.mp3",
+        videoSource: "Video/sea.mov",
+        imageSource: "images/sea.jpg",
+        icon: faVolcano,
+      },
+      volcano: {
+        title: "Volcano",
+        soundSource: "sounds/vulkan.mp3",
+        videoSource: "Video/sea.mov",
+        imageSource: "images/sea.jpg",
+        icon: faVolcano,
+      },
+      cat2: {
+        title: "Cat2",
+        soundSource: "sounds/cats2.mp3",
+        videoSource: "Video/sea.mov",
+        imageSource: "images/sea.jpg",
+        icon: faCat,
       },
 };
 

@@ -12,10 +12,7 @@ interface PlayeerProps {
   handleMuteAll: () => void;
   stopAllSounds: () => void;
   onIconClick: () => void;
-  // selectedSound: SoundData | null;
-  // selectedMixIndex: number | null;  // Добавлено
-  // setSelectedMixIndex: (index: number) => void;
-  // handlePlaySavedMix: (mixIndex: number) => void
+  mixName: string | null;
 }
 
 interface SavedMix {
@@ -31,6 +28,7 @@ const Playeer: React.FC<PlayeerProps> = (
     handleMuteAll,  
     stopAllSounds,
     onIconClick,
+    mixName,
     // selectedMixIndex,  // Добавлено
     // handlePlaySavedMix
    }) => {
@@ -158,9 +156,6 @@ const Playeer: React.FC<PlayeerProps> = (
 
   return (
     <div className={`${styles.media_section} ${isPlaying ? styles.show : ''}`}>
-      {/* {selectedSound && isPlaying && (
-        <h1 className={styles.title}>{selectedSound.title}</h1>
-      )} */}
       <div className={styles.player}>
           <div className={styles.timeLeftContainer}>
                   {remainingTime > 0 && (
@@ -174,9 +169,11 @@ const Playeer: React.FC<PlayeerProps> = (
                       </button>
                     )}
               </div>
+              
           <button className={styles.playButton} onClick={handlePlayPauseClick}>
           <FontAwesomeIcon icon={isPlaying ? faPause : faCirclePlay} className={styles.play} />
         </button>
+              {mixName && <h2 className={styles.mixName}>{mixName}</h2>}
         <div className={styles.volume}>
         <FontAwesomeIcon
             icon={faVolumeOff}
