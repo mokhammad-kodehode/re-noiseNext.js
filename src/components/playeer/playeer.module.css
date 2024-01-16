@@ -10,7 +10,7 @@
     z-index: 1;
     align-items: center;
     justify-content: center;
-    width: 100%;
+   width: 100%;
     background-color: #1c1c1c;
     /* background-image: linear-gradient(to right,
                        rgba(0, 0, 0, 0.0),
@@ -142,8 +142,12 @@ font-size: 18px;
 }
 
 .mixIcon {
-  font-size: 22px;
+  font-size: 18px;
   cursor: pointer;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 5px;
   transition: .2s;
 }
 

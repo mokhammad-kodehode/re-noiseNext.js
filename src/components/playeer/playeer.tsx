@@ -1,7 +1,9 @@
+"use client"
+
 import React, { useState} from 'react';
 import styles from './playeer.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faVolumeOff,faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock, faVault } from '@fortawesome/free-solid-svg-icons';
+import {faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock } from '@fortawesome/free-solid-svg-icons';
 import { SoundData } from '../../data/soundData';
 // import SavedMixes from '../mixes/mixes';
 
@@ -175,24 +177,18 @@ const Playeer: React.FC<PlayeerProps> = (
         </button>
               {mixName && <h2 className={styles.mixName}>{mixName}</h2>}
         <div className={styles.volume}>
-        <FontAwesomeIcon
-            icon={faVolumeOff}
-            className={styles.vol}
-            onClick={handleMuteClick}
-            
-             />
-          <input 
-            className={styles.volumeSlider} 
-            type="range" 
-            min="0"
-            max="100"
-            onChange={handleVolumeSliderChange}
-            />
-          <FontAwesomeIcon
-            icon={isMuted ? faVolumeMute : faVolumeUp}
-            className={styles.vol}
-            onClick={handleMuteClick}
-             />
+            <FontAwesomeIcon
+                icon={isMuted ? faVolumeMute : faVolumeUp}
+                className={styles.vol}
+                onClick={handleMuteClick}
+                />
+              <input 
+                className={styles.volumeSlider} 
+                type="range" 
+                min="0"
+                max="100"
+                onChange={handleVolumeSliderChange}
+                />
            </div>
            <div className={styles.clock}>
                     <FontAwesomeIcon className={styles.clockIcon} icon={faClock} onClick={toggleTimePicker} />
@@ -235,7 +231,7 @@ const Playeer: React.FC<PlayeerProps> = (
                       </div>
                     ) : null}
             </div>
-            <FontAwesomeIcon className={styles.mixIcon} icon={faVault} onClick={onIconClick} />
+            <button className={styles.mixIcon} onClick={onIconClick} > Mixes</button>
       </div>
     </div>
   );
