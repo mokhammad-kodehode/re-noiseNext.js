@@ -15,18 +15,13 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [activeMix, setActiveMix] = useState<string | null>(null);
   const [isMixesContainerOpen, setIsMixesContainerOpen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false); // Добавьте состояние isPlaying
-
-  
 
   const toggleMixesContainer = () => {
     setIsMixesContainerOpen(!isMixesContainerOpen);
   };
 
   
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
+  
 
 
 
@@ -217,15 +212,12 @@ const stopAllSounds = () => {
     handleVolumeChange,
     handleVolumeChangeAll,
     handleMuteAll,
-    isPlaying,
-    setIsPlaying,
-    togglePlayPause,
   };
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;;
 };
 
-export  const useAudioContext = () => {
+export const useAudioContext = () => {
   const context = useContext(AudioContext);
   if (context === undefined) {
     throw new Error('useAudioContext must be used within an AudioContextProvider');

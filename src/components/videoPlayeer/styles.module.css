@@ -1,0 +1,98 @@
+.videoPlayer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.videoContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Чтобы видео было под остальными элементами */
+}
+
+.video {
+  object-fit: cover; /* Подгоняет размер видео под размер контейнера */
+}
+
+
+.media_section {
+    display: flex;
+    border-radius: 5px;
+    bottom: 0;
+    position: fixed;
+    height: 70px; /* Фиксированная высота */
+    flex-direction: column;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    left: 0;
+    background-color: #1c1c1c;
+
+  }
+
+  
+  .videoTitle {
+    /* Ваши стили для заголовка */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+  }
+
+.player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    z-index: 1;
+    height: 50px;
+    width: 650px;
+    
+}
+
+.volume {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.play {
+  background-color: transparent;
+    color: white;
+    font-size: 38px;
+    cursor: pointer;
+    width: 40px;
+}
+
+.audio {
+font-size: 18px;
+width: 35px;
+cursor: pointer;
+}
+
+.fullScreenIcon {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+
+.volumeSlider {
+    width: 100px;
+    accent-color: #ffffff;
+    height: 6px;
+}
+
+
+
+.audioButton ,  .playButton,.fullScreenButton {
+    background-color: transparent;
+    border: none;
+}
+

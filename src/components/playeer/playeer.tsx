@@ -4,8 +4,7 @@ import React, { useState} from 'react';
 import styles from './playeer.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock } from '@fortawesome/free-solid-svg-icons';
-import { SoundData } from '../../data/soundData';
-// import SavedMixes from '../mixes/mixes';
+
 
 interface PlayeerProps {
   isPlaying: boolean;
@@ -42,14 +41,6 @@ const Playeer: React.FC<PlayeerProps> = (
       const [remainingTime, setRemainingTime] = useState<number>(0);
       const [isTimerRunning, setIsTimerRunning] = useState(false);
       const [timerIntervalId, setTimerIntervalId] = useState<number | NodeJS.Timeout | null>(null);
-      // const [isMixPanelOpen, setIsMixPanelOpen] = useState(false);
-
-      // const handleMixPanelOpen = () => {
-      //   // Toggle the state to open/close the Playeer component
-      //   if (selectedMixIndex !== null) {
-      //     setIsMixPanelOpen(!isMixPanelOpen);
-      //   }
-      // };
 
       
 

@@ -8,11 +8,12 @@ const Navbar: React.FC = () => {
       <nav className={styles.navbar}>
           <Link className={styles.logo} href="/" >ReNoise</Link>
         <ul className={styles.items}>
-            <li className={styles.item}>About Us</li>
             <li className={styles.nav_item}>
                      <Link href="/soundPage" className={styles.nav_item}>Sounds</Link>
               </li>
-
+              <li className={styles.nav_item}>
+                     <Link href="/videoPage" className={styles.nav_item}>Relax Video</Link>
+              </li>
         </ul>
       </nav>
     </header>

@@ -3,13 +3,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
     width: 100vw;
     position: relative;
-    /* box-shadow: 0px 0px 11px 3px #000000; */
-    border-bottom: 4px solid black;
+    box-shadow: 0px 0px 5px 1px #000000;
     z-index: 1;
-    padding: 0 20px;
+    padding: 5px 10px;
   }
 
   .logo {
@@ -30,4 +28,41 @@
 
   .item {
     white-space: nowrap;
+  }
+
+  @media (max-width: 844px) {
+    
+  .logo {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    left: 20px;
+  }
+
+  .navbar {
+    background-color: #215889;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    position: relative;
+    /* box-shadow: 0px 0px 11px 3px #000000; */
+    z-index: 1;
+    padding: 10px 10px;
+  }
+
+
+  .items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .7rem;
+    list-style-type: none;
+
+  }
+
+  .item {
+    white-space: nowrap;
+  }
+
   }

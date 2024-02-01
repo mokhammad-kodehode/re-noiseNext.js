@@ -60,7 +60,7 @@ const soundsData :  {[key:string]: SoundData} = {
       bonfire: {
         title: "Bonfire",
         soundSource: "sounds/bonfire.wav",
-        videoSource: "Video/fire2.mp4",
+        videoSource: "videos/bonfire.mp4",
         imageSource: "./Bonfire.jpeg",
         icon: faFire,
       },

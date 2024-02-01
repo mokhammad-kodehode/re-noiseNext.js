@@ -32,7 +32,6 @@ export interface SoundData {
     setActiveMix: React.Dispatch<React.SetStateAction<string | null>>;
     isMixesContainerOpen: boolean;
     setIsMixesContainerOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    isPlaying: boolean;
     toggleMixesContainer: () => void;
     loadMix: (mixName: string) => void;
     stopAllSounds: () => void;
@@ -42,6 +41,5 @@ export interface SoundData {
     handleVolumeChange: (sound: SoundData, volume: number) => void;
     handleVolumeChangeAll: (volume: number) => void;
     handleMuteAll: () => void;
-    togglePlayPause: () => void;
     
   }

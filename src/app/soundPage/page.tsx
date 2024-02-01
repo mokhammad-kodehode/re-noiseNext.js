@@ -134,7 +134,7 @@ const RelaxSoundsMap: React.FC = () => {
               <button className={styles.button} onClick={() => handleSoundClick(sound)}>
                   <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon}  />
               </button>
-              <p>{sound.title}</p>
+              <p className={styles.name}>{sound.title}</p>
               {isCurrentPlaying && (
                 <input
                   className={styles.slider}

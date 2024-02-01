@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import { AudioContextProvider } from './context/AudioContext'
 import './globals.css'
 import Navbar from '@/components/navbar/navbar'
-import GlobalAudioControl from '@/components/GlobalAudioControl/GlobalAudioControl'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -21,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
       <Navbar/>
-      <GlobalAudioControl/>
         {children}
         </body>
     </html>
