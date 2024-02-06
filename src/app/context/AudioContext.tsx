@@ -111,7 +111,6 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     let audioPlayer = audioPlayers[sound.title] || new Howl({
       src: [sound.soundSource],
       loop: true,
-      preload: true, // Добавьте атрибут preload для предварительной загрузки
     });
   
     if (activeSounds.includes(sound.title)) {
