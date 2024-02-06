@@ -9,7 +9,6 @@
     justify-content: center;
     width: 100%;
     background-color: #1c1c1c;
-    margin-top: 5px;
     padding: 5px;
   }
 
@@ -290,10 +289,8 @@ gap: 1rem;
         flex-direction: column;
         z-index: 1;
         align-items: center;
-        background: cover;
         padding: 5px;
-        padding-top: 10px;
-        width: 100%;
+        width: 400px;
         background-color: #1c1c1c;
       }
 
@@ -301,12 +298,11 @@ gap: 1rem;
 .player {
     display: flex;
     align-items: center;
-    position: relative;
     margin: 0 auto;
     gap: 1.6rem;
     padding: 10px;
     z-index: 1;
-    height: 150px;
+    height: 50px;
     width: 100%;
 }
 
@@ -314,9 +310,10 @@ gap: 1rem;
       .timePickerContainer{
         position: absolute;
         display: flex;
+        width: 402px;
       flex-direction: column;
-        left:-300px;
-        top: -260px;
+        left:-290px;
+        top: -170px;
         gap: .7rem;
         background-color: #1c1c1c;
         padding: 30px;
@@ -326,8 +323,9 @@ gap: 1rem;
     
     .pickers {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 1rem;
     }
     
@@ -372,6 +370,9 @@ gap: 1rem;
         background: #666;
       }
     
+      .mixName{
+        display: none;
+      }
 
       .timeLeftContainer {
         display: flex;
@@ -379,10 +380,11 @@ gap: 1rem;
         align-items: center;
         justify-content: center;
         position: absolute;
-        bottom: 110px;
+        bottom: 55px;
         width: 100%;
         left: 0;
         gap: .5rem;
+        background-color: #1c1c1c;
       }
       
       .remainingTime {
