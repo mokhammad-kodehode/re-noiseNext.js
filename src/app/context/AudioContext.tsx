@@ -1,5 +1,6 @@
 "use client"
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState,  } from 'react';
+import { Howl, Howler } from 'howler';
 import { SoundData } from './AudioContextTypes';
 import { MixData } from './AudioContextTypes';
 import { AudioContextType } from './AudioContextTypes';
@@ -8,7 +9,7 @@ import soundsData from '@/data/soundData';
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
 export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [audioPlayers, setAudioPlayers] = useState<Record<string, HTMLAudioElement>>({});
+  const [audioPlayers, setAudioPlayers] = useState<Record<string, Howl>>({});
   const [activeSounds, setActiveSounds] = useState<string[]>([]);
   const [savedSounds, setSavedSounds] = useState<string[]>([]);
   const [mixName, setMixName] = useState<string>('');
@@ -21,12 +22,6 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
   };
 
   
-  
-
-
-
-
-  // Сохранение текущего микса в локальное хранилище
 
 
   const loadMix = (mixName: string) => {
@@ -42,23 +37,24 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
         mixToLoad.activeSounds.forEach(title => {
           // Находим соответствующий звук в soundsData по его заголовку
           const soundData = Object.values(soundsData).find(sound => sound.title === title);
-      
+  
           if (soundData) {
-            let audioPlayer = audioPlayers[title];
-      
-            if (!audioPlayer) {
-              // Создаем новый аудиоплеер
-              audioPlayer = new Audio(soundData.soundSource);
-              audioPlayer.loop = true;
-              setAudioPlayers(prevAudioPlayers => ({
-                ...prevAudioPlayers,
-                [title]: audioPlayer
-              }));
-            }
-      
-            // Установка громкости и воспроизведение
-            audioPlayer.volume = mixToLoad.volumes[title] || 0;
+            let audioPlayer = audioPlayers[title] || new Howl({
+              src: [soundData.soundSource],
+              loop: true,
+              preload: true,
+            });
+  
+            // Установка громкости
+            audioPlayer.volume(mixToLoad.volumes[title] || 0);
+  
+            // Воспроизведение
             audioPlayer.play();
+  
+            setAudioPlayers(prevAudioPlayers => ({
+              ...prevAudioPlayers,
+              [title]: audioPlayer,
+            }));
           } else {
             console.error(`Звук с названием "${title}" отсутствует в данных`);
           }
@@ -72,16 +68,16 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   
 
-const stopAllSounds = () => {
-  Object.values(audioPlayers).forEach((audioPlayer) => {
-    if (audioPlayer) {
-      audioPlayer.pause();
-      audioPlayer.currentTime = 0;
-    }
-  });
-  setActiveSounds([]);
-  console.log('All sounds stopped');
-};
+  const stopAllSounds = () => {
+    Object.values(audioPlayers).forEach((audioPlayer) => {
+      if (audioPlayer) {
+        audioPlayer.stop();
+        audioPlayer.seek(0); // Сброс времени воспроизведения
+      }
+    });
+    setActiveSounds([]);
+    console.log('All sounds stopped');
+  };
 
    // Переключение воспроизведения/остановки при нажатии на название микса
    const toggleMix = (mixName: string) => {
@@ -112,27 +108,30 @@ const stopAllSounds = () => {
   };
 
   const handleSoundClick = (sound: SoundData) => {
-    const audioPlayer = audioPlayers[sound.title] || new Audio(sound.soundSource);
-    
-
+    let audioPlayer = audioPlayers[sound.title] || new Howl({
+      src: [sound.soundSource],
+      loop: true,
+      preload: true, // Добавьте атрибут preload для предварительной загрузки
+    });
+  
     if (activeSounds.includes(sound.title)) {
       audioPlayer.pause();
-      audioPlayer.currentTime = 0;
+      audioPlayer.seek(0); // Сброс времени воспроизведения
       setActiveSounds((prevActiveSounds) => prevActiveSounds.filter((title) => title !== sound.title));
     } else {
-      audioPlayer.loop = true;
       audioPlayer.play();
       setActiveSounds((prevActiveSounds) => [...prevActiveSounds, sound.title]);
     }
-
+  
     setAudioPlayers((prevAudioPlayers) => ({
       ...prevAudioPlayers,
       [sound.title]: audioPlayer,
     }));
-
+  
     console.log(`Play/Stop: ${sound.title}`);
-
   };
+
+
 
   const handlePlayPause = () => {
     const isAnyPlaying = activeSounds.length > 0;
@@ -144,7 +143,7 @@ const stopAllSounds = () => {
       activeSounds.forEach((title) => {
         const audioPlayer = audioPlayers[title];
         audioPlayer.pause();
-        audioPlayer.currentTime = 0;
+        audioPlayer.seek(0);
       });
 
       setActiveSounds([]);
@@ -161,10 +160,10 @@ const stopAllSounds = () => {
 
   const handleVolumeChange = (sound: SoundData, volume: number) => {
     const audioPlayer = audioPlayers[sound.title];
-
+  
     if (audioPlayer) {
-      audioPlayer.volume = volume;
-
+      audioPlayer.volume(volume);
+  
       setAudioPlayers((prevAudioPlayers) => ({
         ...prevAudioPlayers,
         [sound.title]: audioPlayer,
@@ -173,21 +172,23 @@ const stopAllSounds = () => {
   };
 
   const handleVolumeChangeAll = (volume: number) => {
-
-  
+    // Реализация вашей логики для изменения громкости всех звуков
     activeSounds.forEach((title) => {
       const audioPlayer = audioPlayers[title];
-      audioPlayer.volume = volume;
+      if (audioPlayer) {
+        audioPlayer.volume(volume);
+      }
     });
   };
-
+  
   const handleMuteAll = () => {
     activeSounds.forEach((title) => {
       const audioPlayer = audioPlayers[title];
-      audioPlayer.volume = 0;
+      if (audioPlayer) {
+        audioPlayer.volume(0);
+      }
     });
   };
-
   const value = {
     audioPlayers,
     setAudioPlayers,

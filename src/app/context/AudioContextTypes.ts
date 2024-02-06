@@ -1,10 +1,13 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 
+
 export interface SoundData {
     title: string;
-     icon: IconDefinition;
+    icon?: IconDefinition;
+    imageIcon?: string;
     soundSource: string;
+    category: string[];
   }
   
   export interface MixData {
@@ -14,12 +17,12 @@ export interface SoundData {
   }
   
   export interface AudioPlayer {
-    [key: string]: HTMLAudioElement;
+    [key: string]: Howl; // Теперь используем Howl вместо HTMLAudioElement
   }
   
   export interface AudioContextType {
-    audioPlayers: AudioPlayer;
-    setAudioPlayers: React.Dispatch<React.SetStateAction<AudioPlayer>>;
+    audioPlayers: Record<string, Howl>;
+    setAudioPlayers: React.Dispatch<React.SetStateAction<Record<string, Howl>>>;
     activeSounds: string[];
     setActiveSounds: React.Dispatch<React.SetStateAction<string[]>>;
     savedSounds: string[];
@@ -41,5 +44,4 @@ export interface SoundData {
     handleVolumeChange: (sound: SoundData, volume: number) => void;
     handleVolumeChangeAll: (volume: number) => void;
     handleMuteAll: () => void;
-    
   }

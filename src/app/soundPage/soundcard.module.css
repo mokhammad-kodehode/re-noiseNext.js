@@ -1,21 +1,118 @@
 .container {
     display: flex;
+    margin: 0 auto;
     flex-direction: column;
     align-items: center;
-    justify-content:flex-start;
-    gap: 1rem;
+    justify-content:space-between;
+    height:calc(100vh - 45px) ;
     background-color: #215889;
+   
 }
 
 .container_mixes {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     background-color: #1c1c1c;
     border-radius: 5px;
     padding: 15px;
+    gap: .5rem;
+    height: 340px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: 1s ease;
+    animation: fadeOut 1s ease forwards;
+}
+
+.container_mixes_anim  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    padding: 15px 15px;
+    gap: .5rem;
+    opacity: 1;
+    height: 350px;
+    animation: fadeIn 0.5s ease forwards;
+    transition: 1s ease;
+}
+
+.container_my_mixes{
+    display: flex;
+    overflow: auto;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    background-color: #040404;
+    width: 100%;
+    padding: 15px 15px;
+    border-radius: 5px;
+    height: 90%;
+    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 1000px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
+    }
+}
+
+/* Создаем анимацию для исчезновения контейнера */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        max-height: 1000px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
+    }
+    to {
+        opacity: 0;
+        max-height: 0;
+    }
+}
+
+.category {
+    width: 760px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
-    transition: ease-in-out;
+    padding: 20px 0px 10px 0;
+}
+
+.category_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0 ,0.3);
+    border: 1px solid white;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 12px;
+    transition: 0.3s ease-in;
+    width: 70px;
+}
+
+.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0 ,0.7);
+    border: 1px solid white;
+    border-radius: 25px;
+    cursor: pointer;
+    transform: scale(1.1);
+    padding: 5px;
+    font-size: 12px;
+    transition: 0.2s ease-in;
+    width: 70px;
 }
 
 .container_mixes_input {
@@ -43,21 +140,12 @@
 }
 
 .container_mixes_btn:hover {
-    background-color: #3B3B3B;
+    background-color: #0f0f0f;
     border-radius: 5px;
-    font-size: 18px;
+    transform: scale(1.1);
 }
 
-.container_my_mixes{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    background-color: #040404;
-    width: 100%;
-    padding: 15px 15px;
-    border-radius: 5px;
-}
+
 
 .container_my_mixes p{
     font-size: 28px;
@@ -96,11 +184,11 @@
     display: grid;
     grid-template-columns: repeat(7, auto);;
    align-items: center;
-   justify-content: center;
+   justify-content: flex-start;
     list-style-type: none;
     gap: 1rem;
-    margin-top: 20px;
-    padding-bottom: 70px;
+    overflow: auto;
+    transition: 1s ease-in-out;
 }
 
 .images {
@@ -117,8 +205,9 @@
     gap: .5rem;
     position: relative;
     white-space: nowrap;
-    width: 100px;
+    width: 105px;
     margin-top: 10px;
+    
 }
 
 .sound_card_playing .button{
@@ -140,17 +229,26 @@
     font-size: 34px;
 }
 
+.colorIndicator {
+    display: inline-block;
+    width: 40px; /* или любой другой размер, который вам нужен */
+    height: 40px;
+    border-radius: 50%; /* Делает элемент круглым */
+    vertical-align: middle; /* Выравнивание по центру относительно иконки */
+  }
+
 .button {
     background-color: transparent;
     cursor: pointer;
     border: 2px white solid;
     border-radius: 50%;
-    padding: 17px;
     cursor: pointer;
     width: 70px;
+    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0 ,0.1);
 }
 
 .slider{
@@ -171,24 +269,50 @@
   @media (max-width: 844px) {
     .container {
         display: flex;
+        max-width: 100%;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
-        height: 100%;
+        justify-content: flex-start;
+        height: 146vh;
         width: 100%;
         padding:0px 5px;
         gap: 0rem;
-        position: relative;
+    }
+
+    .category {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: auto auto auto auto;
+        margin-top: 10px;
+        gap: 0rem;
+    }
+    
+    .category_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0 ,0.2);
+        border: 1px solid white;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 10px;
+        padding: 7px;
+        font-size: 12px;
+        transition: 0.2s ease-in;
+        width: 75px;
+        margin-left: 15px;
     }
     
     .sound_map {
         display: grid;
         grid-template-columns: repeat(3, auto);;
-       gap: 1.5rem;
-       align-items: center;
-       justify-content: center;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
         list-style-type: none;
-        padding-bottom:0px;
+        padding-bottom:80px;
+        margin: 15px;
     }
     
     .slider{

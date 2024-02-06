@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import soundsData, { SoundData } from '../../data/soundData';
+import soundsData from '../../data/soundData';
 import Playeer from '@/components/playeer/playeer';
 import styles from './soundcard.module.css';
 import { useAudioContext } from '../context/AudioContext';
@@ -11,6 +11,7 @@ import { MixData } from '../context/AudioContextTypes';
 const RelaxSoundsMap: React.FC = () => {
   const [mixName, setMixName] = useState<string>('');
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   
 
 
@@ -44,28 +45,27 @@ const RelaxSoundsMap: React.FC = () => {
   } = useAudioContext();
   
   const saveMix = () => {
-    console.log(mixName)
     try {
       const mixToSave = {
         mixName,
         activeSounds,
         volumes: Object.fromEntries(
-          activeSounds.map((title) => [title, audioPlayers[title]?.volume || 0])
+          activeSounds.map((title) => [title, audioPlayers[title]?.volume() || 0])
         ),
       };
-
+  
       const storedMixes = localStorage.getItem('mixes');
       const mixes = storedMixes ? JSON.parse(storedMixes) as MixData[] : [];
       mixes.push(mixToSave);
       localStorage.setItem('mixes', JSON.stringify(mixes));
-      
-
+  
       setSavedMixes((prevSavedMixes) => [...prevSavedMixes, mixToSave.mixName]);
     } catch (error) {
       console.error("Ошибка при сохранении микса: ", error);
       // Дополнительные действия при ошибке
     }
   };
+
 
   const deleteMix = (mixName: string) => {
     try {
@@ -102,8 +102,37 @@ const RelaxSoundsMap: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Relax Sounds</h1>
-        {isMixesContainerOpen && <div className={styles.container_mixes}>
+      <div className={styles.category}>
+          <button
+            className={`${styles.category_btn} ${selectedCategory === "All" ? styles.active : ""}`}
+            onClick={() => setSelectedCategory("All")}
+          >
+            All
+          </button>
+          <button
+            className={`${styles.category_btn} ${selectedCategory === "rain" ? styles.active : ""}`}
+            onClick={() => setSelectedCategory("rain")}
+          >
+            Rain
+          </button>
+          <button 
+            className={`${styles.category_btn} ${selectedCategory === "fire" ? styles.active : ""}`}
+            onClick={() => setSelectedCategory("fire")}
+            >
+            Fire
+          </button>
+                <button className={`${styles.category_btn} ${selectedCategory === "water" ? styles.active : ""}`} 
+                  onClick={() => setSelectedCategory("water")}>Water</button>
+                <button className={`${styles.category_btn} ${selectedCategory === "nature" ? styles.active : ""}`} 
+                  onClick={() => setSelectedCategory("nature")}>Nature</button>
+                <button className={`${styles.category_btn} ${selectedCategory === "ambience" ? styles.active : ""}`} 
+                  onClick={() => setSelectedCategory("ambience")}>Ambience</button>
+                <button className={`${styles.category_btn} ${selectedCategory === "animals" ? styles.active : ""}`} 
+                  onClick={() => setSelectedCategory("animals")}>Animals</button>
+                <button className={`${styles.category_btn} ${selectedCategory === "color" ? styles.active : ""}`} 
+                onClick={() => setSelectedCategory("color")}>Color</button>
+      </div>
+      {isMixesContainerOpen && <div className={`${styles.container_mixes} ${isMixesContainerOpen ? styles.container_mixes_anim : ""}`}>
             <div className={styles.container_mixes_save}>
                 <input
                   type="text"
@@ -129,27 +158,37 @@ const RelaxSoundsMap: React.FC = () => {
           const sound = soundsData[key];
           const isCurrentPlaying = activeSounds.includes(sound.title);
 
-          return (
-            <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
-              <button className={styles.button} onClick={() => handleSoundClick(sound)}>
-                  <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon}  />
-              </button>
-              <p className={styles.name}>{sound.title}</p>
-              {isCurrentPlaying && (
-                <input
-                  className={styles.slider}
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={audioPlayers[sound.title]?.volume}
-                  onChange={(e) => handleVolumeChange(sound, parseFloat(e.target.value))}
-                />
-              )}
-            </li>
-          );
+          if (selectedCategory === "All" || sound.category.includes(selectedCategory)) {
+            return (
+              <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
+                <button className={styles.button} onClick={() => handleSoundClick(sound)}>
+                  {sound.color && (
+                    <span className={styles.colorIndicator} style={{ backgroundColor: sound.color }}></span>
+                  )}
+                  {sound.icon && (
+                    <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon} />
+                  )}
+                </button>
+                <p className={styles.name}>{sound.title}</p>
+                {isCurrentPlaying && (
+                    <input
+                      className={styles.slider}
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      value={audioPlayers[sound.title]?.volume()}
+                      onChange={(e) => handleVolumeChange(sound, parseFloat(e.target.value))}
+                    />
+                  )}
+              </li>
+            );
+          } else {
+            return null; // Не отображаем звуки, которые не соответствуют выбранной категории
+        }
         })}
       </ul>
+      <h1></h1>
       <Playeer 
       isPlaying={activeSounds.length > 0} 
       handlePlayPause={handlePlayPause}
@@ -158,7 +197,6 @@ const RelaxSoundsMap: React.FC = () => {
       stopAllSounds={stopAllSounds}
       onIconClick={toggleMixesContainer}
       mixName={activeMix}
-      // selectedSound={selectedSound}
        />
        
     </div>

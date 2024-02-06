@@ -3,7 +3,8 @@
 import React, { useState} from 'react';
 import styles from './playeer.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faVolumeUp, faVolumeMute, faPause, faCirclePlay, faClock } from '@fortawesome/free-solid-svg-icons';
+import {faVolumeUp, faVolumeMute, faPause, faPlay, faClock } from '@fortawesome/free-solid-svg-icons';
+import { useAudioContext } from '@/app/context/AudioContext';
 
 
 interface PlayeerProps {
@@ -35,7 +36,7 @@ const Playeer: React.FC<PlayeerProps> = (
    }) => {
     
   
-  const [isMuted, setIsMuted] = useState(false)
+      const [isMuted, setIsMuted] = useState(false)
       const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
       const [selectedTime, setSelectedTime] = useState('');
       const [remainingTime, setRemainingTime] = useState<number>(0);
@@ -43,6 +44,9 @@ const Playeer: React.FC<PlayeerProps> = (
       const [timerIntervalId, setTimerIntervalId] = useState<number | NodeJS.Timeout | null>(null);
 
       
+      const {
+        isMixesContainerOpen,
+      } = useAudioContext();
 
       const startTimerAtTime = (time: string) => {
         const now = new Date();
@@ -164,7 +168,7 @@ const Playeer: React.FC<PlayeerProps> = (
               </div>
               
           <button className={styles.playButton} onClick={handlePlayPauseClick}>
-          <FontAwesomeIcon icon={isPlaying ? faPause : faCirclePlay} className={styles.play} />
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={styles.play} />
         </button>
               {mixName && <h2 className={styles.mixName}>{mixName}</h2>}
         <div className={styles.volume}>
@@ -181,8 +185,9 @@ const Playeer: React.FC<PlayeerProps> = (
                 onChange={handleVolumeSliderChange}
                 />
            </div>
+           <div className={styles.clock_mix}>
            <div className={styles.clock}>
-                    <FontAwesomeIcon className={styles.clockIcon} icon={faClock} onClick={toggleTimePicker} />
+                    <FontAwesomeIcon className={`${styles.clockIcon} ${isTimePickerOpen ? styles.clockIconActive : ""}`} icon={faClock} onClick={toggleTimePicker} />
                     {isTimePickerOpen ? (
                       <div className={styles.timePickerContainer}>
                         <h2>Fade-out Timer</h2>
@@ -222,7 +227,13 @@ const Playeer: React.FC<PlayeerProps> = (
                       </div>
                     ) : null}
             </div>
-            <button className={styles.mixIcon} onClick={onIconClick} > Mixes</button>
+            <button
+                  className={`${styles.mixIcon} ${isMixesContainerOpen ? styles.mixIconActive : ""}`}
+                  onClick={onIconClick}
+                >
+                  Mixes
+            </button>
+           </div>
       </div>
     </div>
   );

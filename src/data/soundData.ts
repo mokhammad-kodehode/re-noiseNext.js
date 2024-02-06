@@ -25,7 +25,9 @@ export interface SoundData {
     soundSource: string;
     videoSource: string;
     imageSource:string;
-    icon: IconDefinition;
+    icon?: IconDefinition ;
+    color?: string;
+    category: string[];
 }
 
 const soundsData :  {[key:string]: SoundData} = {
@@ -35,6 +37,7 @@ const soundsData :  {[key:string]: SoundData} = {
     videoSource: "Video/Raindrops.mp4",
     imageSource: "images/rain.jpg",
     icon: faCloudRain,
+    category: ["All", "rain","nature"],
   },
       rain: {
         title: "Rain",
@@ -42,6 +45,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/Raindrops.mp4",
         imageSource: "images/rain.jpg",
         icon: faCloudRain,
+        category: ["All", "rain"],
       },
       rain3: {
         title: "Rain Heavy",
@@ -49,6 +53,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/Raindrops.mp4",
         imageSource: "images/rain.jpg",
         icon: faCloudShowersHeavy,
+        category: ["All", "rain"],
       },
       rain2: {
         title: "Rain Umbrella",
@@ -56,6 +61,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/Raindrops.mp4",
         imageSource: "images/rain.jpg",
         icon: faUmbrella,
+        category: ["All", "rain"],
       },
       bonfire: {
         title: "Bonfire",
@@ -63,6 +69,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "videos/bonfire.mp4",
         imageSource: "./Bonfire.jpeg",
         icon: faFire,
+        category: ["All", "fire"],
       },
       campfire: {
         title: "Campfire",
@@ -70,6 +77,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/fire2.mp4",
         imageSource: "./Bonfire.jpeg",
         icon: faFire,
+        category: ["All", "fire"],
       },
       forest: {
         title: "Forest",
@@ -77,6 +85,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/forest.mp4",
         imageSource: "images/forest.jpg",
         icon: faTree,
+        category: ["All", "fire"],
       },
       night: {
         title: "Night",
@@ -84,6 +93,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/forest.mp4",
         imageSource: "images/forest.jpg",
         icon: faMoon,
+        category: ["All", "nature"],
       },
       thunder: {
         title: "Thunder",
@@ -91,6 +101,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/thunder.mp4",
         imageSource: "images/thunder.jpg",
         icon: faCloudBolt,
+        category: ["All", "nature"],
       },
       thunder2: {
         title: "Thunder Crack",
@@ -98,13 +109,15 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/thunder.mp4",
         imageSource: "images/thunder.jpg",
         icon: faCloudBolt,
+        category: ["All", "nature"],
       },
       wind: {
         title: "Wind Storm",
         soundSource: "sounds/windstorm.wav",
         videoSource: "Video/thunder.mp4",
-        imageSource: "images/thunder.jpg",
+        imageSource: "images/nature.jpg",
         icon: faWind,
+        category: ["All", "wind"],
       },
       windcold: {
         title: "Wind Storm Cold",
@@ -112,6 +125,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/thunder.mp4",
         imageSource: "images/thunder.jpg",
         icon: faWind,
+        category: ["All", "wind"],
       },
       sea: {
         title: "Sea",
@@ -119,6 +133,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faWater,
+        category: ["All", "water"],
       },
       oceanBeach: {
         title: "Ocean Beach",
@@ -126,6 +141,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faWater,
+        category: ["All", "water"],
       },
       river: {
         title: "River",
@@ -133,6 +149,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faWater,
+        category: ["All", "water"],
       },
       birds: {
         title: "Birds",
@@ -140,6 +157,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "",
         imageSource: "",
         icon: faDove,
+        category: ["All", "animals"],
       },
       cat: {
         title: "Cat Pure",
@@ -147,6 +165,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faCat,
+        category: ["All", "animals"],
       },
       dog: {
         title: "Dog Bark",
@@ -154,6 +173,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faDog,
+        category: ["All", "animals"],
       },
       city: {
         title: "City",
@@ -161,6 +181,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faCity,
+        category: ["All", "ambience"],
       },
       cityPark: {
         title: "City Park",
@@ -168,6 +189,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faTreeCity,
+        category: ["All", "ambience"],
       },
       clock: {
         title: "Clock",
@@ -175,13 +197,15 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faClock,
+        category: ["All", "ambience"],
       },
-      sova: {
-        title: "Sova",
+      owl: {
+        title: "Owl",
         soundSource: "sounds/Sova.mp3",
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faClock,
+        category: ["All", "animals"],
       },
       magma: {
         title: "Magma",
@@ -189,6 +213,7 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faVolcano,
+        category: ["All", "nature"],
       },
       volcano: {
         title: "Volcano",
@@ -196,13 +221,32 @@ const soundsData :  {[key:string]: SoundData} = {
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
         icon: faVolcano,
+        category: ["All", "nature"],
       },
-      cat2: {
-        title: "Cat2",
-        soundSource: "sounds/cats2.mp3",
+      white: {
+        title: "White Noise",
+        soundSource: "sounds/WhiteNoise.wav",
         videoSource: "Video/sea.mov",
         imageSource: "images/sea.jpg",
-        icon: faCat,
+        color: "#ffffff",
+        category: ["All", "color"],
+      },
+      pink: {
+        title: "Pink Noise",
+        soundSource: "sounds/pink.wav",
+        videoSource: "Video/sea.mov",
+        imageSource: "images/sea.jpg",
+        color: "#FFC0CB",
+        category: ["All", "color"],
+        
+      },
+      brown: {
+        title: "Brown Noise",
+        soundSource: "sounds/brown.wav",
+        videoSource: "Video/sea.mov",
+        imageSource: "images/sea.jpg",
+        color: "#A52A2A",
+        category: ["All", "color"],
       },
 };
 
