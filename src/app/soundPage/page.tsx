@@ -102,71 +102,73 @@ const RelaxSoundsMap: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.category}>
-          <button
-            className={`${styles.category_btn} ${selectedCategory === "All" ? styles.active : ""}`}
-            onClick={() => setSelectedCategory("All")}
-          >
-            All
-          </button>
-          <button
-            className={`${styles.category_btn} ${selectedCategory === "rain" ? styles.active : ""}`}
-            onClick={() => setSelectedCategory("rain")}
-          >
-            Rain
-          </button>
-          <button 
-            className={`${styles.category_btn} ${selectedCategory === "fire" ? styles.active : ""}`}
-            onClick={() => setSelectedCategory("fire")}
-            >
-            Fire
-          </button>
-                <button className={`${styles.category_btn} ${selectedCategory === "water" ? styles.active : ""}`} 
-                  onClick={() => setSelectedCategory("water")}>Water</button>
-                <button className={`${styles.category_btn} ${selectedCategory === "nature" ? styles.active : ""}`} 
-                  onClick={() => setSelectedCategory("nature")}>Nature</button>
-                <button className={`${styles.category_btn} ${selectedCategory === "ambience" ? styles.active : ""}`} 
-                  onClick={() => setSelectedCategory("ambience")}>Ambience</button>
-                <button className={`${styles.category_btn} ${selectedCategory === "animals" ? styles.active : ""}`} 
-                  onClick={() => setSelectedCategory("animals")}>Animals</button>
-                <button className={`${styles.category_btn} ${selectedCategory === "color" ? styles.active : ""}`} 
-                onClick={() => setSelectedCategory("color")}>Color</button>
-      </div>
-      <ul className={styles.sound_map}>
-      {Object.keys(soundsData).map((key) => {
-          const sound = soundsData[key];
-          const isCurrentPlaying = activeSounds.includes(sound.title);
+      <div className={styles.category_soundmap}>
+          <div className={styles.category}>
+              <button
+                className={`${styles.category_btn} ${selectedCategory === "All" ? styles.active : ""}`}
+                onClick={() => setSelectedCategory("All")}
+              >
+                All
+              </button>
+              <button
+                className={`${styles.category_btn} ${selectedCategory === "rain" ? styles.active : ""}`}
+                onClick={() => setSelectedCategory("rain")}
+              >
+                Rain
+              </button>
+              <button 
+                className={`${styles.category_btn} ${selectedCategory === "fire" ? styles.active : ""}`}
+                onClick={() => setSelectedCategory("fire")}
+                >
+                Fire
+              </button>
+                    <button className={`${styles.category_btn} ${selectedCategory === "water" ? styles.active : ""}`} 
+                      onClick={() => setSelectedCategory("water")}>Water</button>
+                    <button className={`${styles.category_btn} ${selectedCategory === "nature" ? styles.active : ""}`} 
+                      onClick={() => setSelectedCategory("nature")}>Nature</button>
+                    <button className={`${styles.category_btn} ${selectedCategory === "ambience" ? styles.active : ""}`} 
+                      onClick={() => setSelectedCategory("ambience")}>Ambience</button>
+                    <button className={`${styles.category_btn} ${selectedCategory === "animals" ? styles.active : ""}`} 
+                      onClick={() => setSelectedCategory("animals")}>Animals</button>
+                    <button className={`${styles.category_btn} ${selectedCategory === "color" ? styles.active : ""}`} 
+                    onClick={() => setSelectedCategory("color")}>Color</button>
+          </div>
+          <ul className={styles.sound_map}>
+          {Object.keys(soundsData).map((key) => {
+              const sound = soundsData[key];
+              const isCurrentPlaying = activeSounds.includes(sound.title);
 
-          if (selectedCategory === "All" || sound.category.includes(selectedCategory)) {
-            return (
-              <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
-                <button className={styles.button} onClick={() => handleSoundClick(sound)}>
-                  {sound.color && (
-                    <span className={styles.colorIndicator} style={{ backgroundColor: sound.color }}></span>
-                  )}
-                  {sound.icon && (
-                    <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon} />
-                  )}
-                </button>
-                <p className={styles.name}>{sound.title}</p>
-                {isCurrentPlaying && (
-                    <input
-                      className={styles.slider}
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.01"
-                      value={audioPlayers[sound.title]?.volume()}
-                      onChange={(e) => handleVolumeChange(sound, parseFloat(e.target.value))}
-                    />
-                  )}
-              </li>
-            );
-          } else {
-            return null; // Не отображаем звуки, которые не соответствуют выбранной категории
-        }
-        })}
-      </ul>
+              if (selectedCategory === "All" || sound.category.includes(selectedCategory)) {
+                return (
+                  <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
+                    <button className={styles.button} onClick={() => handleSoundClick(sound)}>
+                      {sound.color && (
+                        <span className={styles.colorIndicator} style={{ backgroundColor: sound.color }}></span>
+                      )}
+                      {sound.icon && (
+                        <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon} />
+                      )}
+                    </button>
+                    <p className={styles.name}>{sound.title}</p>
+                    {isCurrentPlaying && (
+                        <input
+                          className={styles.slider}
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.01"
+                          value={audioPlayers[sound.title]?.volume()}
+                          onChange={(e) => handleVolumeChange(sound, parseFloat(e.target.value))}
+                        />
+                      )}
+                  </li>
+                );
+              } else {
+                return null; // Не отображаем звуки, которые не соответствуют выбранной категории
+            }
+            })}
+          </ul>
+      </div>
       {isMixesContainerOpen && <div className={`${styles.container_mixes} ${isMixesContainerOpen ? styles.container_mixes_anim : ""}`}>
             <div className={styles.container_mixes_save}>
                 <input

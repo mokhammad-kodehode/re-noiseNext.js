@@ -55,6 +55,13 @@
     
 }
 
+.category_soundmap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -190,7 +197,7 @@
     gap: 1rem;
     overflow: auto;
     transition: 1s ease-in-out;
-    height: 450px;
+    height: 490px;
     padding: 5px;
 }
 
@@ -276,9 +283,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        height: 100vh;
+        height: 100%;
         width: 100%;
-        padding:0px 5px;
         gap: 0rem;
     }
 
@@ -340,6 +346,7 @@
 
     .container_mixes {
         display: flex;
+        position: absolute;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
@@ -365,7 +372,7 @@
         border-top: 5px;
         padding: 15px 15px;
         gap: .5rem;
-        width: 400px;
+        width: 390px;
         opacity: 1;
         height: 350px;
         animation: fadeIn 0.5s ease forwards;
@@ -379,7 +386,7 @@
         flex-direction: column;
         align-items: center;
         background-color: #040404;
-        width: 630px;
+        width: 390px;
         padding: 15px 15px;
         border-radius: 5px;
         height: 90%;
