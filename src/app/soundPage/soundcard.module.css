@@ -92,7 +92,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0 ,0.3);
-    border: 1px solid white;
+    border: 1px solid #FFFFFF;
     border-radius: 25px;
     cursor: pointer;
     padding: 5px;
@@ -106,7 +106,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0 ,0.7);
-    border: 1px solid white;
+    border: 1px solid #FFFFFF;
     border-radius: 25px;
     cursor: pointer;
     transform: scale(1.1);
@@ -243,7 +243,7 @@
 .button {
     background-color: transparent;
     cursor: pointer;
-    border: 2px white solid;
+    border: 2px #FFFFFF solid;
     border-radius: 50%;
     cursor: pointer;
     width: 70px;
@@ -296,7 +296,7 @@
         justify-content: center;
         align-items: center;
         background-color: rgba(0, 0, 0 ,0.2);
-        border: 1px solid white;
+        border: 1px solid #FFFFFF;
         border-radius: 25px;
         cursor: pointer;
         margin-top: 10px;
@@ -476,13 +476,13 @@
     
     .icon {
         font-size: 32px;
-        color: white;
+        color: #FFFFFF;
     }
     
     .button {
         background-color: transparent;
         cursor: pointer;
-        border: 2px white solid;
+        border: 2px #FFFFFF solid;
         border-radius: 50%;
         padding: 10px;
         width: 60px;
