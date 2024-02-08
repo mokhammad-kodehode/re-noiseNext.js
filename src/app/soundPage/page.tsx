@@ -102,7 +102,6 @@ const RelaxSoundsMap: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.category_soundmap}>
           <div className={styles.category}>
               <button
                 className={`${styles.category_btn} ${selectedCategory === "All" ? styles.active : ""}`}
@@ -168,28 +167,27 @@ const RelaxSoundsMap: React.FC = () => {
             }
             })}
           </ul>
-      </div>
-      {isMixesContainerOpen && <div className={`${styles.container_mixes} ${isMixesContainerOpen ? styles.container_mixes_anim : ""}`}>
-            <div className={styles.container_mixes_save}>
-                <input
-                  type="text"
-                  placeholder="Text name of mixe"
-                  value={mixName}
-                  onChange={handleMixNameChange}
-                  className={styles.container_mixes_input}
-                  onKeyDown={handleKeyPress}
-                />
-                <button className={styles.container_mixes_btn} onClick={saveMix}>Save mix</button>
-            </div>
-            <div className={styles.container_my_mixes}>
-                    {savedMixes.map((mixName, index) => (
-                  <div key={`${mixName}_${index}`} onClick={() => toggleMix(mixName)} className={styles.mix_play}>
-                    {mixName}
-                    <button className={styles.remove_btn} onClick={() => deleteMix(mixName)}>Remove</button>
-                  </div>
-           ))}
-            </div>
-        </div>}
+          {isMixesContainerOpen && <div className={`${styles.container_mixes} ${isMixesContainerOpen ? styles.container_mixes_anim : ""}`}>
+                <div className={styles.container_mixes_save}>
+                    <input
+                      type="text"
+                      placeholder="Text name of mixe"
+                      value={mixName}
+                      onChange={handleMixNameChange}
+                      className={styles.container_mixes_input}
+                      onKeyDown={handleKeyPress}
+                    />
+                    <button className={styles.container_mixes_btn} onClick={saveMix}>Save mix</button>
+                </div>
+                <div className={styles.container_my_mixes}>
+                        {savedMixes.map((mixName, index) => (
+                      <div key={`${mixName}_${index}`} onClick={() => toggleMix(mixName)} className={styles.mix_play}>
+                        {mixName}
+                        <button className={styles.remove_btn} onClick={() => deleteMix(mixName)}>Remove</button>
+                      </div>
+              ))}
+                </div>
+            </div>}
       <Playeer 
       isPlaying={activeSounds.length > 0} 
       handlePlayPause={handlePlayPause}

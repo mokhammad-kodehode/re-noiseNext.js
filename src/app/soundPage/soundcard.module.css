@@ -9,78 +9,68 @@
    
 }
 
-.container_mixes {
-    display: flex;
-    flex-direction: column;
+
+.sound_map {
+    display: grid;
+    grid-template-columns: repeat(7, auto);;
     align-items: flex-start;
     justify-content: flex-start;
-    background-color: #1c1c1c;
-    border-top: 5px;
-    padding: 15px;
-    gap: .5rem;
-    height: 340px;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    transition: 1s ease;
-    animation: fadeOut 1s ease forwards;
-}
-
-.container_mixes_anim  {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #1c1c1c;
-    border-top: 5px;
-    padding: 15px 15px;
-    gap: .5rem;
-    width: 100%;
-    opacity: 1;
-    height: 350px;
-    animation: fadeIn 0.5s ease forwards;
-    transition: 1s ease;
-}
-
-.container_my_mixes{
-    display: flex;
+    list-style-type: none;
     overflow: auto;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-    background-color: #040404;
-    width: 630px;
-    padding: 15px 15px;
-    border-radius: 5px;
-    height: 90%;
-    
+    gap: 1rem;
+    transition: 1s ease-in-out;
+    height: 500px;
 }
 
-.category_soundmap {
+
+
+.sound_card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: .5rem;
+    width: 105px;
+    position: relative;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+    margin-top: 10px;
+    
 }
+
+.sound_card_playing .button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px rgb(255, 255, 255) solid;
+    border-radius: 50%;
+    padding: 5px;
+    transform: scale(1.1);
+    transition: 0.5s;
+    background-color: black;
+    width: 70px;
+    height: 70px;
+}
+
+
 
 @keyframes fadeIn {
     from {
-        opacity: 0;
-        max-height: 0;
+        margin-bottom: -148px;
     }
     to {
-        opacity: 1;
-        max-height: 1000px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
+        margin-bottom: 0px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
     }
 }
 
 /* Создаем анимацию для исчезновения контейнера */
 @keyframes fadeOut {
     from {
-        opacity: 1;
         max-height: 1000px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
     }
     to {
-        opacity: 0;
         max-height: 0;
     }
 }
@@ -123,11 +113,60 @@
     width: 70px;
 }
 
+.sound_map_mixes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.container_mixes {
+    display: flex;
+    right: 5px;
+    bottom: 66px;
+    flex-direction: column;
+    background-color: #1c1c1c;
+    border-radius: 5px 5px 0 0;
+    padding: 20px;
+    gap: .5rem;
+    overflow: hidden;
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.container_mixes_anim  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1c1c1c;
+    padding: 15px 25px;
+    gap: .5rem;
+    opacity: 1;
+    width: 100%;
+    height: 290px;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.container_my_mixes{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: auto;
+    align-items: center;
+    background-color: #040404;
+    width: 650px;
+    padding: 15px 15px;
+    border-radius: 5px;
+    height: 100%;
+    
+}
+
 .container_mixes_input {
-    width: 500px;
-    font-size: 20px;
+    width: 100%;
+    font-size: 16px;
     height: 40px;
     padding: 5px;
+    border-radius: 5px;
+    border: none;
 }
 
 .container_mixes_save{
@@ -135,6 +174,7 @@
     justify-content: center;
     gap: 1rem;
     margin-top: 10px;
+    width: 650px;
 }
 
 .container_mixes_btn {
@@ -165,7 +205,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 590px;
+    width: 100%;
     padding: 10px 10px;
     cursor: pointer;
     transition: .5s;
@@ -188,52 +228,6 @@
 }
 
 
-.sound_map {
-    display: grid;
-    grid-template-columns: repeat(7, auto);;
-   align-items: flex-start;
-   justify-content: flex-start;
-    list-style-type: none;
-    gap: 1rem;
-    overflow: auto;
-    transition: 1s ease-in-out;
-    height: 490px;
-    padding: 5px;
-}
-
-.images {
-    width: 150px;
-}
-
-
-
-.sound_card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-    position: relative;
-    white-space: nowrap;
-    width: 105px;
-    margin-top: 10px;
-    
-}
-
-.sound_card_playing .button{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px rgb(255, 255, 255) solid;
-    border-radius: 50%;
-    padding: 5px;
-    transform: scale(1.1);
-    transition: 0.5s;
-    background-color: black;
-    width: 70px;
-    height: 70px;
-}
 
 .icon {
     font-size: 34px;
@@ -284,9 +278,9 @@
         align-items: center;
         justify-content: flex-start;
         height: 100%;
-        width: 100%;
         gap: 0rem;
     }
+
 
     .category {
         display: grid;
@@ -317,13 +311,12 @@
         display: grid;
         grid-template-columns: repeat(3, auto);;
         gap: 1.5rem;
-        overflow: auto;
         align-items: start;
         justify-content: start ;
         list-style-type: none;
-        padding-bottom:40px;
+        overflow: auto;
         height: 100%;
-        margin: 15px;
+        padding-bottom: 90px;
     }
 
     .sound_card {
@@ -331,6 +324,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 108px;
         gap:0;
         position: relative;
     }
@@ -338,41 +332,35 @@
     
     .slider{
         display: none;
-        width: 80px;
-        height: 20px; /* Примерная высота */
-        position: absolute;
-        bottom: -20px;
     }
 
     .container_mixes {
         display: flex;
-        position: absolute;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
         background-color: #1c1c1c;
-        border-top: 5px;
-        padding: 15px;
+        padding: 5px;
         gap: .5rem;
-        height: 340px;
+        height: 100%;
         width: 400px;
         opacity: 0;
-        height: 0;
+        left: 0;
         overflow: hidden;
         transition: 1s ease;
         animation: fadeOut 1s ease forwards;
-        margin-bottom: 80px;
     }
     
     .container_mixes_anim  {
         display: flex;
+        position: fixed;
+        bottom: 50px;
         flex-direction: column;
         align-items: center;
         background-color: #1c1c1c;
-        border-top: 5px;
-        padding: 15px 15px;
+        padding: 10px 5px;
         gap: .5rem;
-        width: 390px;
+        width: 392px;
         opacity: 1;
         height: 350px;
         animation: fadeIn 0.5s ease forwards;
@@ -386,7 +374,7 @@
         flex-direction: column;
         align-items: center;
         background-color: #040404;
-        width: 390px;
+        width: 100%;
         padding: 15px 15px;
         border-radius: 5px;
         height: 90%;

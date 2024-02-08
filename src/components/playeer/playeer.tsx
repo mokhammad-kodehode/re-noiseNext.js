@@ -42,7 +42,7 @@ const Playeer: React.FC<PlayeerProps> = (
       const [remainingTime, setRemainingTime] = useState<number>(0);
       const [isTimerRunning, setIsTimerRunning] = useState(false);
       const [timerIntervalId, setTimerIntervalId] = useState<number | NodeJS.Timeout | null>(null);
-
+      const [isTimeLeftContainerVisible, setIsTimeLeftContainerVisible] = useState(false);
       
       const {
         isMixesContainerOpen,
@@ -84,6 +84,7 @@ const Playeer: React.FC<PlayeerProps> = (
 
       const toggleTimePicker = () => {
         setIsTimePickerOpen(!isTimePickerOpen);
+        setIsTimeLeftContainerVisible(!isTimeLeftContainerVisible); 
       };
     
       const closeTimePicker = () => {
@@ -123,6 +124,7 @@ const Playeer: React.FC<PlayeerProps> = (
           setRemainingTime(0);
           setIsTimerRunning(false);
           setTimerIntervalId(null);
+          setIsTimeLeftContainerVisible(false)
         }
       };
 
@@ -153,44 +155,9 @@ const Playeer: React.FC<PlayeerProps> = (
 
   return (
     <div className={`${styles.media_section} ${isPlaying ? styles.show : ''}`}>
-      <div className={styles.player}>
-          <div className={styles.timeLeftContainer}>
-                  {remainingTime > 0 && (
-                      <div className={styles.remainingTime}>
-                        Remaining Time: {Math.floor(remainingTime / 60)} minutes {remainingTime % 60} seconds
-                      </div>
-                    )}
-                    {isTimerRunning && (
-                      <button className={styles.cancelButton} onClick={cancelTimer}>
-                        Cancel
-                      </button>
-                    )}
-              </div>
-              
-          <button className={styles.playButton} onClick={handlePlayPauseClick}>
-          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={styles.play} />
-        </button>
-              {mixName && <h2 className={styles.mixName}>{mixName}</h2>}
-        <div className={styles.volume}>
-            <FontAwesomeIcon
-                icon={isMuted ? faVolumeMute : faVolumeUp}
-                className={styles.vol}
-                onClick={handleMuteClick}
-                />
-              <input 
-                className={styles.volumeSlider} 
-                type="range" 
-                min="0"
-                max="100"
-                onChange={handleVolumeSliderChange}
-                />
-           </div>
-           <div className={styles.clock_mix}>
-           <div className={styles.clock}>
-                    <FontAwesomeIcon className={`${styles.clockIcon} ${isTimePickerOpen ? styles.clockIconActive : ""}`} icon={faClock} onClick={toggleTimePicker} />
-                    {isTimePickerOpen ? (
+        {isTimePickerOpen ? (
                       <div className={styles.timePickerContainer}>
-                        <h2>Fade-out Timer</h2>
+                        <h2>Timer</h2>
                         <div className={styles.pickers}>
                               <div className={styles.afterDur}>
                                   <label className={styles.forLabel} htmlFor="timeSelect">After a duration</label>
@@ -226,6 +193,41 @@ const Playeer: React.FC<PlayeerProps> = (
                         </div>
                       </div>
                     ) : null}
+               <div className={styles.timeLeftContainer} style={{ display: isTimeLeftContainerVisible ? 'block' : 'none' }}>
+                  {remainingTime > 0 && (
+                      <div className={styles.remainingTime}>
+                        Remaining Time: {Math.floor(remainingTime / 60)} minutes {remainingTime % 60} seconds
+                      </div>
+                    )}
+                    {isTimerRunning && (
+                      <button className={styles.cancelButton} onClick={cancelTimer}>
+                        Cancel
+                      </button>
+                    )}
+              </div>
+      <div className={styles.player}>
+              
+          <button className={styles.playButton} onClick={handlePlayPauseClick}>
+          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={styles.play} />
+        </button>
+              {mixName && <h2 className={styles.mixName}>{mixName}</h2>}
+        <div className={styles.volume}>
+            <FontAwesomeIcon
+                icon={isMuted ? faVolumeMute : faVolumeUp}
+                className={styles.vol}
+                onClick={handleMuteClick}
+                />
+              <input 
+                className={styles.volumeSlider} 
+                type="range" 
+                min="0"
+                max="100"
+                onChange={handleVolumeSliderChange}
+                />
+           </div>
+           <div className={styles.clock_mix}>
+           <div className={styles.clock}>
+                    <FontAwesomeIcon className={`${styles.clockIcon} ${isTimePickerOpen ||  isTimerRunning ? styles.clockIconActive : ""}`} icon={faClock} onClick={toggleTimePicker} />
             </div>
             <button
                   className={`${styles.mixIcon} ${isMixesContainerOpen ? styles.mixIconActive : ""}`}

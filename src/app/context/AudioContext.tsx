@@ -135,25 +135,37 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const handlePlayPause = () => {
     const isAnyPlaying = activeSounds.length > 0;
-
+  
     if (isAnyPlaying) {
-
+      // Сохранение текущих воспроизводимых звуков
       setSavedSounds(activeSounds);
-
+  
+      // Остановка всех активных звуков
       activeSounds.forEach((title) => {
         const audioPlayer = audioPlayers[title];
-        audioPlayer.pause();
-        audioPlayer.seek(0);
+        if (audioPlayer) {
+          audioPlayer.pause();
+          audioPlayer.seek(0);
+        }
       });
-
+  
+      // Очистка списка активных звуков
       setActiveSounds([]);
     } else {
-
-      setActiveSounds(savedSounds);
-
-      savedSounds.forEach((title) => {
+      // Воспроизведение сохраненных звуков
+      const promises = savedSounds.map((title) => {
         const audioPlayer = audioPlayers[title];
-        audioPlayer.play();
+        if (audioPlayer) {
+          return audioPlayer.play();
+        }
+      });
+  
+      // Обработка возможных ошибок воспроизведения
+      Promise.all(promises).then(() => {
+        setActiveSounds(savedSounds);
+      }).catch((error) => {
+        console.error("Ошибка воспроизведения:", error);
+        // Здесь можете добавить дополнительную логику обработки ошибки
       });
     }
   };

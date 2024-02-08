@@ -12,8 +12,6 @@
     padding: 5px;
   }
 
-
-
   .mixName{
     display: flex;
     justify-content: center;
@@ -23,11 +21,14 @@
     font-weight: 300;
  }
 
+
 .vol {
 font-size: 12px;
 display: none;
 cursor: pointer;
 }
+
+
 
 .player {
     display: flex;
@@ -39,7 +40,10 @@ cursor: pointer;
     width: 650px;
     border: 1px rgb(61, 61, 61) solid;
     border-radius: 10px;
+    position: relative;
 }
+
+
 .clock_mix {
   display: flex;
   gap: 1rem;
@@ -57,7 +61,6 @@ cursor: pointer;
   display: flex;
   flex-direction: column;
   text-align: center;
-  position: absolute;
   bottom: 0px;
   right: 0;
   width: 400px;
@@ -100,6 +103,11 @@ cursor: pointer;
     background-color: transparent;
     border: none;
     transition: .5s;
+}
+
+.playButton {
+  width: 40px;
+  text-align: start;
 }
 
 .cancelButton:hover {
@@ -170,23 +178,39 @@ font-size: 18px;
 }
 
 .timePickerContainer{
-    position: fixed;
     border-radius: 5px;
     display: flex;
+    flex-direction: column;
     background-color: #1c1c1c;
-    padding: 30px;
-  flex-direction: column;
-    left: 45%;
-    top: 35%;
+    padding: 15px;
     gap: .7rem;
-    transition: 1s;
+
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      margin-bottom: -35px;
+  }
+  to {
+      margin-bottom: 0px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
+  }
+}
+
+/* Создаем анимацию для исчезновения контейнера */
+@keyframes fadeOut {
+  from {
+      max-height: 1000px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
+  }
+  to {
+      max-height: 0;
+  }
 }
 
 .pickers {
-display: flex;
-flex-direction: column;
-gap: 1rem;
-}
+  display: flex;
+  gap: 1rem;
+  }
 
 .afterTime, .afterDur {
     display: flex;
@@ -308,12 +332,9 @@ gap: 1rem;
 
 
       .timePickerContainer{
-        position: absolute;
         display: flex;
         width: 402px;
       flex-direction: column;
-        left:-290px;
-        top: -170px;
         gap: .7rem;
         background-color: #1c1c1c;
         padding: 30px;
@@ -418,6 +439,7 @@ gap: 1rem;
         box-shadow: 0 0 5px #0099cc; /* Тень при фокусе */
         background: #666;
       }
+
     
       .clock {
         display: flex;
