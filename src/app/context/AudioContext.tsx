@@ -127,6 +127,17 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
       ...prevAudioPlayers,
       [sound.title]: audioPlayer,
     }));
+
+    // Попытка возобновить звук в фоновом режиме
+    if (Howler.ctx.state === 'suspended') {
+      Howler.ctx.resume().then(() => {
+        console.log('Audio context resumed');
+      }).catch((error) => {
+        console.error('Failed to resume audio context:', error);
+      });
+    }
+  
+    console.log(`Play/Stop: ${sound.title}`);
   
     console.log(`Play/Stop: ${sound.title}`);
   };
