@@ -106,18 +106,12 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }
   };
 
-  Howler.autoUnlock = false;
 
   const handleSoundClick = (sound: SoundData) => {
     let audioPlayer = audioPlayers[sound.title] || new Howl({
       src: [sound.soundSource],
       loop: true,
       preload: true, // Добавьте атрибут preload для предварительной загрузки
-      onplayerror: (err) => {
-        if (err) {
-          console.error('Playback error:', err);
-        }
-      }
     });
   
     if (activeSounds.includes(sound.title)) {
