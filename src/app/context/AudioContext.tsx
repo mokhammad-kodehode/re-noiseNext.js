@@ -113,10 +113,10 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
       src: [sound.soundSource],
       loop: true,
       preload: true, // Добавьте атрибут preload для предварительной загрузки
-      onplayerror: function() {
-        audioPlayer.once('unlock', function() {
-          audioPlayer.play();
-        });
+      onplayerror: (err) => {
+        if (err) {
+          console.error('Playback error:', err);
+        }
       }
     });
   
