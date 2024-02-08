@@ -154,7 +154,15 @@ interface VideoPlayerProps {
     return (
       <div className={styles.videoPlayer}>
         <div className={styles.videoContainer}>
-          <video className={styles.video} ref={videoRef} src={videoSource} autoPlay loop muted>
+          <video 
+          className={styles.video} 
+          ref={videoRef} 
+          src={videoSource} 
+          autoPlay 
+          loop 
+          muted
+          playsInline
+          preload="auto">
             Your browser does not support the video tag.
           </video>
         </div>
