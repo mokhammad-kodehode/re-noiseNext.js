@@ -21,7 +21,6 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     setIsMixesContainerOpen(!isMixesContainerOpen);
   };
 
-  
 
 
   const loadMix = (mixName: string) => {
@@ -107,11 +106,18 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }
   };
 
+  Howler.autoUnlock = false;
+
   const handleSoundClick = (sound: SoundData) => {
     let audioPlayer = audioPlayers[sound.title] || new Howl({
       src: [sound.soundSource],
       loop: true,
       preload: true, // Добавьте атрибут preload для предварительной загрузки
+      onplayerror: function() {
+        audioPlayer.once('unlock', function() {
+          audioPlayer.play();
+        });
+      }
     });
   
     if (activeSounds.includes(sound.title)) {
@@ -135,37 +141,25 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
   const handlePlayPause = () => {
     const isAnyPlaying = activeSounds.length > 0;
-  
+
     if (isAnyPlaying) {
-      // Сохранение текущих воспроизводимых звуков
+
       setSavedSounds(activeSounds);
-  
-      // Остановка всех активных звуков
+
       activeSounds.forEach((title) => {
         const audioPlayer = audioPlayers[title];
-        if (audioPlayer) {
-          audioPlayer.pause();
-          audioPlayer.seek(0);
-        }
+        audioPlayer.pause();
+        audioPlayer.seek(0);
       });
-  
-      // Очистка списка активных звуков
+
       setActiveSounds([]);
     } else {
-      // Воспроизведение сохраненных звуков
-      const promises = savedSounds.map((title) => {
+
+      setActiveSounds(savedSounds);
+
+      savedSounds.forEach((title) => {
         const audioPlayer = audioPlayers[title];
-        if (audioPlayer) {
-          return audioPlayer.play();
-        }
-      });
-  
-      // Обработка возможных ошибок воспроизведения
-      Promise.all(promises).then(() => {
-        setActiveSounds(savedSounds);
-      }).catch((error) => {
-        console.error("Ошибка воспроизведения:", error);
-        // Здесь можете добавить дополнительную логику обработки ошибки
+        audioPlayer.play();
       });
     }
   };
