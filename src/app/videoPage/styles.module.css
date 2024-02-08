@@ -33,3 +33,41 @@
     font-size: 16px;
     
 }
+
+
+@media (max-width: 844px) {
+    
+.videoCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0 ,0.7);
+    border: 2px solid var(--Relax-color, #3a81be);
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 12px;
+    transition: 0.2s ease-in;
+    width: 135px;
+}
+
+.videoCard:hover{
+    background-color: rgb(35, 74, 105);
+  }
+
+.videoCard h2 {
+    font-size: 12px;
+    text-shadow: 1px 1px 5px black;
+    font-weight: 400;
+}
+
+
+.videoCardList {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 16px;
+    
+}
+}
