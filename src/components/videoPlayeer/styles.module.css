@@ -112,6 +112,31 @@ cursor: pointer;
     height: 100%;
     z-index: -1; /* Чтобы видео было под остальными элементами */
   }
+
+  .media_section {
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    align-items: center;
+    padding: 5px 10px;
+    width: 400px;
+    background-color: #1c1c1c;
+  }
+
+  
+.player {
+display: flex;
+align-items: center;
+margin: 0 auto;
+gap: 1.6rem;
+padding: 10px;
+z-index: 1;
+height: 50px;
+width: 100%;
+}
+
   
   .video {
     width: 100%;

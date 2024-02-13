@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause, faVolumeUp, faVolumeMute,faCompress,faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faPlay,faClock, faPause, faVolumeUp, faVolumeMute,faCompress,faExpand } from '@fortawesome/free-solid-svg-icons';
 
 interface VideoPlayerProps {
     isPlaying: boolean;
@@ -195,6 +195,9 @@ interface VideoPlayerProps {
                     max="100"
                     onChange={handleVolumeChange}
                   />
+            </div>
+            <div className={styles.clock}>
+                    <FontAwesomeIcon icon={faClock} className={styles.clockIcon} />
             </div>
             <button className={styles.fullScreenButton} onClick={toggleFullScreen}>
               <FontAwesomeIcon

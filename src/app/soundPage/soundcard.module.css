@@ -39,6 +39,11 @@
     
 }
 
+.name {
+    margin-top: 5px;
+    color: #FFFFFF;
+}
+
 .sound_card_playing .button{
     display: flex;
     flex-direction: column;
@@ -288,6 +293,7 @@
     height: 20px; /* Примерная высота */
     position: absolute;
     bottom: -20px;
+    accent-color: #ffffff;
 }
 
 .title {
@@ -390,7 +396,7 @@
         gap: .5rem;
         width: 392px;
         opacity: 1;
-        height: 350px;
+        height: 250px;
         animation: fadeIn 0.5s ease forwards;
         transition: 1s ease;
     }
@@ -405,12 +411,22 @@
         width: 100%;
         padding: 15px 15px;
         border-radius: 5px;
-        height: 90%;
+        height: 70%;
         
     }
+
+    .wrapper_mixes{
+        padding: 10px;
+        border: 1px rgb(61, 61, 61) solid;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+
+    }
+    
     
     .container_mixes_input {
-        width: 275px;
+        width: 100%;
         font-size: 20px;
         height: 40px;
         padding: 5px;
@@ -428,7 +444,7 @@
         width: 70px;
         font-size: 12px;
         background-color: transparent;
-        border: 1px solid #215889;
+        border: 1px rgb(61, 61, 61) solid;
         border-radius: 10px;
         transition: .5s;
         cursor: pointer;
@@ -479,7 +495,7 @@
 
     .name {
         margin-top: 5px;
-        
+        color: #FFFFFF;
     }
     
     .sound_card_playing .button{

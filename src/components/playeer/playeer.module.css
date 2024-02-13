@@ -50,12 +50,6 @@ cursor: pointer;
   justify-content: space-between;
 }
 
-.volume {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: .5rem;
-}
 
 
 .timeLeftContainer {
@@ -316,7 +310,7 @@ font-size: 18px;
         flex-direction: column;
         z-index: 1;
         align-items: center;
-        padding: 5px;
+        padding: 5px 10px;
         width: 400px;
         background-color: #1c1c1c;
       }
