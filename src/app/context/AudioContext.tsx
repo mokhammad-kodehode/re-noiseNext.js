@@ -30,34 +30,38 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
       const mixToLoad = mixes.find(mix => mix.mixName === mixName);
   
       if (mixToLoad) {
-        stopAllSounds();
-        setActiveSounds(mixToLoad.activeSounds);
+        if (activeMix === mixName) {
+          // Если текущий микс уже активен, остановите его
+          stopAllSounds();
+          setActiveMix(null);
+        } else {
+          stopAllSounds();
+          setActiveSounds(mixToLoad.activeSounds);
   
-        mixToLoad.activeSounds.forEach(title => {
-          // Находим соответствующий звук в soundsData по его заголовку
-          const soundData = Object.values(soundsData).find(sound => sound.title === title);
+          mixToLoad.activeSounds.forEach(title => {
+            const soundData = Object.values(soundsData).find(sound => sound.title === title);
   
-          if (soundData) {
-            let audioPlayer = audioPlayers[title] || new Howl({
-              src: [soundData.soundSource],
-              loop: true,
-              preload: true,
-            });
+            if (soundData) {
+              let audioPlayer = audioPlayers[title] || new Howl({
+                src: [soundData.soundSource],
+                loop: true,
+                preload: true,
+              });
   
-            // Установка громкости
-            audioPlayer.volume(mixToLoad.volumes[title] || 0);
+              audioPlayer.volume(mixToLoad.volumes[title] || 0);
+              audioPlayer.play();
   
-            // Воспроизведение
-            audioPlayer.play();
+              setAudioPlayers(prevAudioPlayers => ({
+                ...prevAudioPlayers,
+                [title]: audioPlayer,
+              }));
+            } else {
+              console.error(`Звук с названием "${title}" отсутствует в данных`);
+            }
+          });
   
-            setAudioPlayers(prevAudioPlayers => ({
-              ...prevAudioPlayers,
-              [title]: audioPlayer,
-            }));
-          } else {
-            console.error(`Звук с названием "${title}" отсутствует в данных`);
-          }
-        });
+          setActiveMix(mixName);
+        }
       }
     } catch (error) {
       console.error("Ошибка при загрузке микса: ", error);
@@ -121,6 +125,7 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     } else {
       audioPlayer.play();
       setActiveSounds((prevActiveSounds) => [...prevActiveSounds, sound.title]);
+      setMixName("")
     }
   
     setAudioPlayers((prevAudioPlayers) => ({
@@ -129,15 +134,6 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }));
 
     // Попытка возобновить звук в фоновом режиме
-    if (Howler.ctx.state === 'suspended') {
-      Howler.ctx.resume().then(() => {
-        console.log('Audio context resumed');
-      }).catch((error) => {
-        console.error('Failed to resume audio context:', error);
-      });
-    }
-  
-    console.log(`Play/Stop: ${sound.title}`);
   
     console.log(`Play/Stop: ${sound.title}`);
   };

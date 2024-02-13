@@ -46,6 +46,12 @@ const RelaxSoundsMap: React.FC = () => {
   
   const saveMix = () => {
     try {
+      // Проверяем, что mixName не пустая строка
+      if (mixName.trim() === "") {
+        console.warn("Нельзя сохранить микс с пустым именем");
+        return;
+      }
+  
       const mixToSave = {
         mixName,
         activeSounds,
@@ -177,15 +183,18 @@ const RelaxSoundsMap: React.FC = () => {
                       className={styles.container_mixes_input}
                       onKeyDown={handleKeyPress}
                     />
-                    <button className={styles.container_mixes_btn} onClick={saveMix}>Save mix</button>
+                    <button className={styles.container_mixes_btn} onClick={saveMix}>Save</button>
                 </div>
                 <div className={styles.container_my_mixes}>
-                        {savedMixes.map((mixName, index) => (
-                      <div key={`${mixName}_${index}`} onClick={() => toggleMix(mixName)} className={styles.mix_play}>
+                    {savedMixes.map((mixName, index) => (
+                     <div 
+                        key={`${mixName}_${index}`} 
+                        onClick={() => toggleMix(mixName)} 
+                        className={`${styles.mix_play} ${activeMix === mixName && activeSounds.length > 0 ? styles.active_mix : ''}`}>
                         {mixName}
                         <button className={styles.remove_btn} onClick={() => deleteMix(mixName)}>Remove</button>
                       </div>
-              ))}
+                     ))}
                 </div>
             </div>}
       <Playeer 

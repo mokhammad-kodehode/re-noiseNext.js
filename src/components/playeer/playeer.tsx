@@ -17,10 +17,6 @@ interface PlayeerProps {
   mixName: string | null;
 }
 
-interface SavedMix {
-  name: string;
-  sounds: string[];
-}
 
 const Playeer: React.FC<PlayeerProps> = (
   {
@@ -210,7 +206,7 @@ const Playeer: React.FC<PlayeerProps> = (
           <button className={styles.playButton} onClick={handlePlayPauseClick}>
           <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={styles.play} />
         </button>
-              {mixName && <h2 className={styles.mixName}>{mixName}</h2>}
+
         <div className={styles.volume}>
             <FontAwesomeIcon
                 icon={isMuted ? faVolumeMute : faVolumeUp}

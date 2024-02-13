@@ -54,6 +54,24 @@
     height: 70px;
 }
 
+.button {
+    background-color: transparent;
+    cursor: pointer;
+    border: 2px #FFFFFF solid;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    transition: 0.5s;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0 ,0.1);
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0 ,1);
+}
 
 
 @keyframes fadeIn {
@@ -154,10 +172,10 @@
     align-items: center;
     background-color: #040404;
     width: 650px;
-    padding: 15px 15px;
+    padding: 10px 10px;
     border-radius: 5px;
     height: 100%;
-    
+    gap: .5rem;
 }
 
 .container_mixes_input {
@@ -167,6 +185,7 @@
     padding: 5px;
     border-radius: 5px;
     border: none;
+    background-color: white;
 }
 
 .container_mixes_save{
@@ -185,12 +204,12 @@
     border: none;
     transition: .5s;
     cursor: pointer;
+    border: 1px rgb(61, 61, 61) solid;
+    border-radius: 5px;
 }
 
 .container_mixes_btn:hover {
     background-color: #0f0f0f;
-    border-radius: 5px;
-    transform: scale(1.1);
 }
 
 
@@ -206,10 +225,16 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 10px;
+    padding: 7px 7px;
     cursor: pointer;
     transition: .5s;
     font-size: 18px;
+    border: 1px rgb(61, 61, 61) solid;
+}
+
+.active_mix {
+    background-color: #3B3B3B;
+    transform: scale(1.02);
 }
 
 .remove_btn {
@@ -224,7 +249,6 @@
 
 .mix_play:hover {
     background-color: #3B3B3B;
-    transform: scale(1.03);
 }
 
 
@@ -241,19 +265,6 @@
     vertical-align: middle; /* Выравнивание по центру относительно иконки */
   }
 
-.button {
-    background-color: transparent;
-    cursor: pointer;
-    border: 2px #FFFFFF solid;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 70px;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0 ,0.1);
-}
 
 .slider{
     width: 80px;
