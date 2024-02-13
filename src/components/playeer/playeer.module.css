@@ -46,7 +46,8 @@ cursor: pointer;
 
 .clock_mix {
   display: flex;
-  gap: 1rem;
+  width: 94px;
+  justify-content: space-between;
 }
 
 .volume {

@@ -98,7 +98,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
     padding: 20px 0px 10px 0;
 }
 
@@ -140,6 +139,14 @@
     gap: 2rem;
 }
 
+.wrapper_mixes{
+    padding: 10px;
+    border: 1px rgb(61, 61, 61) solid;
+    height: 100%;
+    width: 650px;
+    border-radius: 10px;
+}
+
 .container_mixes {
     display: flex;
     right: 5px;
@@ -173,19 +180,22 @@
     overflow: auto;
     align-items: center;
     background-color: #040404;
-    width: 650px;
+    width: 100%;
     padding: 10px 10px;
-    border-radius: 5px;
-    height: 100%;
+    border-radius: 10px;
+    height: 190px;
     gap: .5rem;
+    margin-top: 10px;
 }
+
+
 
 .container_mixes_input {
     width: 100%;
     font-size: 16px;
     height: 40px;
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     color: #2f2f2f;
     border: none;
     background-color: white;
@@ -195,8 +205,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 10px;
-    width: 650px;
+    width: 100%;
 }
 
 .container_mixes_btn {
@@ -208,7 +217,7 @@
     transition: .5s;
     cursor: pointer;
     border: 1px rgb(61, 61, 61) solid;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .container_mixes_btn:hover {
@@ -223,7 +232,7 @@
 }
 
 .mix_play {
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -242,14 +251,17 @@
 }
 
 .remove_btn {
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 5px;
+    color: #FFFFFF;
     background-color: rgb(162, 39, 39);
     border: none;
     font-size: 12px;
     width: 60px;
     height: 25px;
 }
+
+
 
 .mix_play:hover {
     background-color: #3B3B3B;

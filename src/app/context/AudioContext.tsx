@@ -30,14 +30,8 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
       const mixToLoad = mixes.find(mix => mix.mixName === mixName);
   
       if (mixToLoad) {
-        if (activeMix === mixName) {
-          // Если текущий микс уже активен, остановите его
-          stopAllSounds();
-          setActiveMix(null);
-        } else {
-          stopAllSounds();
-          setActiveSounds(mixToLoad.activeSounds);
-  
+        // Запустить звуки только если они еще не играют
+        if (activeSounds.length === 0) {
           mixToLoad.activeSounds.forEach(title => {
             const soundData = Object.values(soundsData).find(sound => sound.title === title);
   
@@ -59,8 +53,6 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
               console.error(`Звук с названием "${title}" отсутствует в данных`);
             }
           });
-  
-          setActiveMix(mixName);
         }
       }
     } catch (error) {
@@ -69,6 +61,22 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }
   };
 
+  const toggleMix = (mixName: string) => {
+    if (activeMix === mixName) {
+      // Остановить все текущие звуки, если они играют
+      stopAllSounds();
+      setActiveMix(null);
+    } else {
+      // Сохранение текущего активного микса
+      setSavedSounds(activeSounds);
+      stopAllSounds();
+  
+      // Воспроизведение нового микса
+      loadMix(mixName);
+      setActiveMix(mixName);
+    }
+  };
+  
   
 
   const stopAllSounds = () => {
@@ -82,33 +90,6 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     console.log('All sounds stopped');
   };
 
-   // Переключение воспроизведения/остановки при нажатии на название микса
-   const toggleMix = (mixName: string) => {
-    const mixIndex = savedMixes.indexOf(mixName);
-    const isMixPlaying = activeSounds.length > 0 && mixIndex !== -1;
-  
-    if (isMixPlaying) {
-      if (activeMix === mixName) {
-        // Если текущий микс уже активен, остановите его
-        stopAllSounds();
-        setActiveMix(null);
-      } else {
-        // Сохранение текущего активного микса
-        setSavedSounds(activeSounds);
-  
-        // Остановка всех текущих звуков
-        stopAllSounds();
-  
-        // Воспроизведение нового микса
-        loadMix(mixName);
-        setActiveMix(mixName);
-      }
-    } else {
-      // Воспроизведение сохраненного микса
-      loadMix(mixName);
-      setActiveMix(mixName);
-    }
-  };
 
 
   const handleSoundClick = (sound: SoundData) => {

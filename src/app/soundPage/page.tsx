@@ -174,6 +174,7 @@ const RelaxSoundsMap: React.FC = () => {
             })}
           </ul>
           {isMixesContainerOpen && <div className={`${styles.container_mixes} ${isMixesContainerOpen ? styles.container_mixes_anim : ""}`}>
+            <div className={styles.wrapper_mixes}>
                 <div className={styles.container_mixes_save}>
                     <input
                       type="text"
@@ -190,12 +191,13 @@ const RelaxSoundsMap: React.FC = () => {
                      <div 
                         key={`${mixName}_${index}`} 
                         onClick={() => toggleMix(mixName)} 
-                        className={`${styles.mix_play} ${activeMix === mixName && activeSounds.length > 0 ? styles.active_mix : ''}`}>
+                        className={`${styles.mix_play} ${activeMix === mixName  ? styles.active_mix : ''}`}>
                         {mixName}
                         <button className={styles.remove_btn} onClick={() => deleteMix(mixName)}>Remove</button>
                       </div>
                      ))}
                 </div>
+            </div>
             </div>}
       <Playeer 
       isPlaying={activeSounds.length > 0} 
