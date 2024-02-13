@@ -140,6 +140,7 @@ font-size: 18px;
     font-size: 22px;
     cursor: pointer;
     transition: .2s;
+    color: #ffffff;
 }
 
 .clockIconActive {
@@ -159,6 +160,7 @@ font-size: 18px;
   border: 1px solid rgb(95, 95, 95);
   padding: 5px;
   transition: .2s;
+  color: #ffffff;
 }
 
 .mixIconActive{

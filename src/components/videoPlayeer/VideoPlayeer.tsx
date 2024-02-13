@@ -177,7 +177,9 @@ interface VideoPlayerProps {
                 className={styles.play}
               />
             </button>
-            <div className={styles.videoTitle}>{title}</div>
+            {isPlaying && (
+              <div className={styles.videoTitle}>{title}</div>
+            )} 
             <div className={styles.volume}>
                 <button className={styles.audioButton} >
                   <FontAwesomeIcon
