@@ -44,4 +44,5 @@ export interface SoundData {
     handleVolumeChange: (sound: SoundData, volume: number) => void;
     handleVolumeChangeAll: (volume: number) => void;
     handleMuteAll: () => void;
+    
   }

@@ -16,6 +16,7 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [activeMix, setActiveMix] = useState<string | null>(null);
   const [isMixesContainerOpen, setIsMixesContainerOpen] = useState(false);
+  
 
   const toggleMixesContainer = () => {
     setIsMixesContainerOpen(!isMixesContainerOpen);

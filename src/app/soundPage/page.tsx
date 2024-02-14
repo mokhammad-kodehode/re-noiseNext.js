@@ -7,12 +7,13 @@ import Playeer from '@/components/playeer/playeer';
 import styles from './soundcard.module.css';
 import { useAudioContext } from '../context/AudioContext';
 import { MixData } from '../context/AudioContextTypes';
+import Image from 'next/image';
 
 const RelaxSoundsMap: React.FC = () => {
   const [mixName, setMixName] = useState<string>('');
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  
+
 
 
   useEffect(() => {
@@ -43,6 +44,9 @@ const RelaxSoundsMap: React.FC = () => {
     toggleMixesContainer
     
   } = useAudioContext();
+
+  
+
   
   const saveMix = () => {
     try {
@@ -147,10 +151,15 @@ const RelaxSoundsMap: React.FC = () => {
                 return (
                   <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
                     <button className={styles.button} onClick={() => handleSoundClick(sound)}>
-                      {sound.color && (
+                    {sound.color && (
                         <span className={styles.colorIndicator} style={{ backgroundColor: sound.color }}></span>
                       )}
-                      {sound.icon && (
+                      {sound.title === "Owl" && sound.imageSource && (
+                        <div className={styles.imageWrapper}>
+                          <Image src={sound.imageSource} alt={sound.title} width={45} height={43} />
+                        </div>
+                      )}
+                      {sound.title !== "Owl" && sound.icon && ( // Если не "Owl", используем иконку
                         <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon} />
                       )}
                     </button>

@@ -203,7 +203,7 @@ const soundsData :  {[key:string]: SoundData} = {
         title: "Owl",
         soundSource: "sounds/Sova.mp3",
         videoSource: "Video/sea.mov",
-        imageSource: "images/sea.jpg",
+        imageSource: "images/owl.svg",
         icon: faClock,
         category: ["All", "animals"],
       },
