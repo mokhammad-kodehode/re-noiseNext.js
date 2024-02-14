@@ -93,6 +93,10 @@ cursor: pointer;
 }
 
 
+.clockIcon {
+  display: none;
+}
+
 
 .audioButton ,  .playButton,.fullScreenButton {
     background-color: transparent;
@@ -103,6 +107,12 @@ cursor: pointer;
 
 
 @media (max-width: 844px) {
+
+
+  .clockIcon {
+    display: block;
+  }
+
   .videoContainer {
     display: flex;
     justify-content: center;

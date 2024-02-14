@@ -150,6 +150,7 @@
     height: 100%;
     width: 650px;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .container_mixes {
@@ -188,7 +189,7 @@
     width: 100%;
     padding: 10px 10px;
     border-radius: 10px;
-    height: 190px;
+    height: 110px;
     gap: .5rem;
     margin-top: 10px;
 }
@@ -421,7 +422,7 @@
         height: 100%;
         width: 100%;
         border-radius: 10px;
-
+        overflow: hidden;
     }
     
     

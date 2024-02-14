@@ -25,15 +25,6 @@ export default function Home() {
                 <div className={styles.img_ocean}></div>
               </div>
             </section>
-            <section className={styles.conatiner_two}>
-            <Image
-                src="/SectionTwo.png" // Путь к изображению луны
-                alt="Nixes"
-                width={600} 
-                height={400} 
-                className={styles.img_section2}
-              />
-            </section>
         </main>
     </div>
   )

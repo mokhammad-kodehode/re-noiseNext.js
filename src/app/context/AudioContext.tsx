@@ -30,46 +30,53 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
       const mixToLoad = mixes.find(mix => mix.mixName === mixName);
   
       if (mixToLoad) {
-        // Запустить звуки только если они еще не играют
-        if (activeSounds.length === 0) {
-          mixToLoad.activeSounds.forEach(title => {
-            const soundData = Object.values(soundsData).find(sound => sound.title === title);
+        stopAllSounds();
+        setActiveSounds(mixToLoad.activeSounds);
   
-            if (soundData) {
-              let audioPlayer = audioPlayers[title] || new Howl({
-                src: [soundData.soundSource],
-                loop: true,
-                preload: true,
-              });
+        mixToLoad.activeSounds.forEach(title => {
+          // Находим соответствующий звук в soundsData по его заголовку
+          const soundData = Object.values(soundsData).find(sound => sound.title === title);
   
-              audioPlayer.volume(mixToLoad.volumes[title] || 0);
-              audioPlayer.play();
+          if (soundData) {
+            let audioPlayer = audioPlayers[title] || new Howl({
+              src: [soundData.soundSource],
+              loop: true,
+              preload: true,
+            });
   
-              setAudioPlayers(prevAudioPlayers => ({
-                ...prevAudioPlayers,
-                [title]: audioPlayer,
-              }));
-            } else {
-              console.error(`Звук с названием "${title}" отсутствует в данных`);
-            }
-          });
-        }
+            // Установка громкости
+            audioPlayer.volume(mixToLoad.volumes[title] || 0);
+  
+            // Воспроизведение
+            audioPlayer.play();
+  
+            setAudioPlayers(prevAudioPlayers => ({
+              ...prevAudioPlayers,
+              [title]: audioPlayer,
+            }));
+          } else {
+            console.error(`Звук с названием "${title}" отсутствует в данных`);
+          }
+        });
       }
     } catch (error) {
       console.error("Ошибка при загрузке микса: ", error);
       // Дополнительные действия при ошибке
     }
-  };
+  }
 
   const toggleMix = (mixName: string) => {
     if (activeMix === mixName) {
-      // Остановить все текущие звуки, если они играют
       stopAllSounds();
       setActiveMix(null);
     } else {
       // Сохранение текущего активного микса
       setSavedSounds(activeSounds);
-      stopAllSounds();
+  
+      if (activeSounds.length > 0) {
+        // Остановка всех текущих звуков, если они играют
+        stopAllSounds();
+      }
   
       // Воспроизведение нового микса
       loadMix(mixName);
