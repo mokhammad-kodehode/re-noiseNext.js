@@ -75,9 +75,6 @@
     background-color: rgba(0, 0, 0 ,0.1);
 }
 
-.button:hover {
-    transform: scale(1.1);
-}
 
 
 @keyframes fadeIn {
