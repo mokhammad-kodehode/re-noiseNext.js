@@ -5,8 +5,14 @@
   justify-content: center;
   background-color: #0F2D49;
   width: 100%;
-  height: calc(100vh - 40px);
   font-family: 'Poppins', sans-serif;
+}
+
+.conatiner_two {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 650px;
 }
 
 .title {
@@ -29,23 +35,24 @@
 
 .descp {
   font-weight: 200;
+  width: 500px;
 }
 
 .btn{
   display: flex;
-width: 150px;
-height: 50px;
-padding: 10px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-flex-shrink: 0;
-border: 2px solid var(--Relax-color, #3a81be);;
-border-radius: 53px;
-cursor: pointer;
-background: transparent;
-transition: .5s;
-font-size: 16px;
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border: 2px solid var(--Relax-color, #3a81be);;
+  border-radius: 53px;
+  cursor: pointer;
+  background: transparent;
+  transition: .5s;
+  font-size: 16px;
 }
 
 .btn:hover{

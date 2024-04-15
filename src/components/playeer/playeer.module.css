@@ -6,9 +6,8 @@
     flex-direction: column;
     z-index: 1;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    background-color: #1c1c1c;
+    justify-content: flex-start;
+    width: 60%;
     padding: 5px;
   }
 
@@ -36,11 +35,11 @@ cursor: pointer;
     justify-content: space-between;
     padding: 0 15px;
     z-index: 1;
-    height: 55px;
-    width: 650px;
-    border: 1px rgb(61, 61, 61) solid;
+    height: 65px;
+    width: 850px;
     border-radius: 10px;
     position: relative;
+    background-color: #214054;
 }
 
 
@@ -85,7 +84,7 @@ cursor: pointer;
 
 
 .volumeSlider {
-    width: 180px;
+    width: 440px;
     accent-color: #ffffff;
     height: 9px;
 }
@@ -175,13 +174,15 @@ font-size: 18px;
 }
 
 .timePickerContainer{
-    border-radius: 5px;
+    border-radius: 15px;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    background-color: #1c1c1c;
+    opacity: 1;
+    width: 850px;
     padding: 15px;
     gap: .7rem;
-
+    background-color: #214054;
     animation: fadeIn 0.5s ease forwards;
 }
 
@@ -312,7 +313,6 @@ font-size: 18px;
         align-items: center;
         padding: 5px 10px;
         width: 400px;
-        background-color: #1c1c1c;
       }
 
       
@@ -320,11 +320,17 @@ font-size: 18px;
     display: flex;
     align-items: center;
     margin: 0 auto;
-    gap: 1.6rem;
+    gap: 1rem;
     padding: 10px;
     z-index: 1;
-    height: 50px;
+    height: 65px;
     width: 100%;
+}
+
+.volumeSlider {
+  width: 200px;
+  accent-color: #ffffff;
+  height: 9px;
 }
 
 
@@ -437,6 +443,11 @@ font-size: 18px;
         background: #666;
       }
 
+      .clock_mix {
+        display: flex;
+        width: 83px;
+        justify-content: space-between;
+      }
     
       .clock {
         display: flex;

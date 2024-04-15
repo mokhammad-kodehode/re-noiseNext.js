@@ -6,7 +6,7 @@
     justify-content:space-between;
     height:calc(100vh - 45px) ;
     /* background-color: #215889; */
-    background-image: linear-gradient(to bottom, #215889,#194469, #1c1c1c);
+    /* background-image: linear-gradient(to bottom, #215889,#194469, #1c1c1c); */
    
 }
 
@@ -18,9 +18,8 @@
     justify-content: flex-start;
     list-style-type: none;
     overflow: auto;
-    gap: .5rem;
+    gap: 2rem;
     transition: 1s ease-in-out;
-    height: 540px;
 }
 
 
@@ -31,18 +30,17 @@
     justify-content: center;
     align-items: center;
     gap: .5rem;
-    width: 105px;
+    width: 85px;
     position: relative;
     font-size: 14px;
     white-space: nowrap;
     text-align: center;
     margin-top: 10px;
-    margin-left: 15px;
 }
 
 .name {
     margin-top: 5px;
-    color: #FFFFFF;
+    color: #dbf3ff;
 }
 
 .sound_card_playing .button{
@@ -52,34 +50,33 @@
     justify-content: center;
     border: 2px rgb(255, 255, 255) solid;
     border-radius: 50%;
-    padding: 5px;
     transform: scale(1.1);
     transition: 0.5s;
-    background-color: black;
-    width: 70px;
-    height: 70px;
+    background-color: #214054;
+    padding: 5px;
+
 }
 
 .button {
-    background-color: transparent;
+    padding: 5px;
     cursor: pointer;
     border: 2px #FFFFFF solid;
     border-radius: 50%;
     cursor: pointer;
-    width: 70px;
-    height: 70px;
+    width: 55px;
+    height: 55px;
     display: flex;
     transition: 0.5s;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0 ,0.1);
+    background-color: rgba(0, 0, 0 ,0.2);
 }
 
 
 
 @keyframes fadeIn {
     from {
-        margin-bottom: -148px;
+        margin-bottom: -50px;
     }
     to {
         margin-bottom: 0px; /* Установите максимальную высоту, которая позволит контейнеру расширяться */
@@ -109,7 +106,8 @@
     justify-content: center;
     align-items: center;
     color: #FFFFFF;
-    background-color: rgba(0, 0, 0 ,0.3);
+    /* background-color: rgba(0, 0, 0 ,0.3); */
+    background-color: #214054;
     border: 1px solid #FFFFFF;
     border-radius: 25px;
     cursor: pointer;
@@ -123,7 +121,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0 ,0.7);
+    background-color: #214054;
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
     border-radius: 25px;
@@ -146,19 +144,18 @@
     padding: 10px;
     border: 1px rgb(61, 61, 61) solid;
     height: 100%;
-    width: 650px;
+    width: 100%;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .container_mixes {
     display: flex;
-    right: 5px;
-    bottom: 66px;
     flex-direction: column;
-    background-color: #1c1c1c;
-    border-radius: 5px 5px 0 0;
-    padding: 20px;
+    background-color:#214054;
+    border-radius: 15px ;
+    padding: 10px;
+    height: 350px;
     gap: .5rem;
     overflow: hidden;
     animation: fadeOut 0.5s ease forwards;
@@ -168,12 +165,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #1c1c1c;
-    padding: 15px 25px;
+    background-color: #214054;
+    padding: 15px 5px;
     gap: .5rem;
     opacity: 1;
-    width: 100%;
-    height: 290px;
+    width: 850px;
     animation: fadeIn 0.5s ease forwards;
 }
 
@@ -187,7 +183,7 @@
     width: 100%;
     padding: 10px 10px;
     border-radius: 10px;
-    height: 80%;
+    height: 75%;
     gap: .5rem;
     margin-top: 10px;
 }
@@ -220,7 +216,7 @@
     border: none;
     transition: .5s;
     cursor: pointer;
-    border: 1px rgb(61, 61, 61) solid;
+    border: 1px rgb(0, 0, 0) solid;
     border-radius: 10px;
 }
 
@@ -245,7 +241,7 @@
     cursor: pointer;
     transition: .5s;
     font-size: 18px;
-    border: 1px rgb(61, 61, 61) solid;
+    border: 1px rgb(26, 23, 23) solid;
     color: #FFFFFF;
 }
 
@@ -276,8 +272,8 @@
 }
 
 .icon {
-    font-size: 34px;
-    color: #FFFFFF;
+    font-size: 26px;
+    color: #F0F6F9;
 }
 
 .colorIndicator {
@@ -511,7 +507,7 @@
 
     .name {
         margin-top: 5px;
-        color: #FFFFFF;
+        color: #F0F6F9;
     }
     
     .sound_card_playing .button{
