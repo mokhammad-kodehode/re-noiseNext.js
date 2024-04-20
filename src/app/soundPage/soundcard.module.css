@@ -13,13 +13,13 @@
 
 .sound_map {
     display: grid;
+    width: 850px;
     grid-template-columns: repeat(7, auto);;
-    align-items: flex-start;
-    justify-content: flex-start;
-    list-style-type: none;
-    overflow: auto;
-    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 2rem;
     transition: 1s ease-in-out;
+    overflow: auto;
 }
 
 
@@ -94,7 +94,7 @@
 }
 
 .category {
-    width: 760px;
+    width: 850px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -107,7 +107,8 @@
     align-items: center;
     color: #FFFFFF;
     /* background-color: rgba(0, 0, 0 ,0.3); */
-    background-color: #214054;
+    /* background-color: #214054; */
+    background-color: transparent;
     border: 1px solid #FFFFFF;
     border-radius: 25px;
     cursor: pointer;
@@ -141,8 +142,7 @@
 }
 
 .wrapper_mixes{
-    padding: 10px;
-    border: 1px rgb(61, 61, 61) solid;
+    padding: 5px;
     height: 100%;
     width: 100%;
     border-radius: 10px;
@@ -154,7 +154,7 @@
     flex-direction: column;
     background-color:#214054;
     border-radius: 15px ;
-    padding: 10px;
+    padding: 0;
     height: 350px;
     gap: .5rem;
     overflow: hidden;
@@ -166,7 +166,7 @@
     flex-direction: column;
     align-items: center;
     background-color: #214054;
-    padding: 15px 5px;
+    padding: 5px 5px;
     gap: .5rem;
     opacity: 1;
     width: 850px;
@@ -216,7 +216,7 @@
     border: none;
     transition: .5s;
     cursor: pointer;
-    border: 1px rgb(0, 0, 0) solid;
+    border: 1px rgb(255, 255, 255) solid;
     border-radius: 10px;
 }
 
@@ -317,6 +317,7 @@
   }
 
   @media (max-width: 844px) {
+
     .container {
         display: flex;
         max-width: 100%;
@@ -333,7 +334,7 @@
         justify-content: center;
         align-items: center;
         grid-template-columns: auto auto auto auto;
-        margin-top: 10px;
+        margin-top: 5px;
         gap: 0rem;
     }
     
@@ -341,7 +342,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgba(0, 0, 0 ,0.2);
+        background-color: transparent;
         border: 1px solid #FFFFFF;
         border-radius: 25px;
         cursor: pointer;
@@ -355,10 +356,11 @@
     
     .sound_map {
         display: grid;
+        width: 400px;
         grid-template-columns: repeat(3, auto);;
-        gap: 1.5rem;
-        align-items: start;
-        justify-content: start ;
+        gap: 1rem;
+        align-items: flex-start;
+        justify-content: space-around;
         list-style-type: none;
         overflow: auto;
         height: 100%;
@@ -370,7 +372,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 108px;
+        width: 88px;
         gap:0;
         position: relative;
     }
@@ -385,11 +387,11 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        background-color: #1c1c1c;
+        background-color: #214054;
         padding: 5px;
         gap: .5rem;
         height: 100%;
-        width: 400px;
+        width: 390px;
         opacity: 0;
         left: 0;
         overflow: hidden;
@@ -400,15 +402,16 @@
     .container_mixes_anim  {
         display: flex;
         position: fixed;
-        bottom: 50px;
+        bottom: 80px;
+        left: 5px;
         flex-direction: column;
         align-items: center;
-        background-color: #1c1c1c;
+        background-color: #214054;
         padding: 10px 5px;
         gap: .5rem;
-        width: 392px;
+        width: 380px;
         opacity: 1;
-        height: 250px;
+        height: 450px;
         animation: fadeIn 0.5s ease forwards;
         transition: 1s ease;
     }
@@ -423,12 +426,12 @@
         width: 100%;
         padding: 15px 15px;
         border-radius: 5px;
-        height: 70%;
+        height: 85%;
         
     }
 
     .wrapper_mixes{
-        padding: 10px;
+        padding: 5px;
         border: 1px rgb(61, 61, 61) solid;
         height: 100%;
         width: 100%;

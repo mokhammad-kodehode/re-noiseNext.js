@@ -63,9 +63,17 @@ const soundsData :  {[key:string]: SoundData} = {
         icon: faUmbrella,
         category: ["All", "rain"],
       },
+      fireplace: {
+        title: "Fireplace",
+        soundSource: "sounds/bonfire.wav",
+        videoSource: "videos/bonfire.mp4",
+        imageSource: "./Bonfire.jpeg",
+        icon: faFire,
+        category: ["All", "fire"],
+      },
       bonfire: {
         title: "Bonfire",
-        soundSource: "sounds/bonfire.wav",
+        soundSource: "sounds/bonfire2.wav",
         videoSource: "videos/bonfire.mp4",
         imageSource: "./Bonfire.jpeg",
         icon: faFire,

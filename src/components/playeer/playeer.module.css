@@ -60,7 +60,7 @@ cursor: pointer;
   width: 400px;
   margin: auto;
   gap: .5rem;
-  padding: 10px;
+  padding: 5px;
   border-radius: 5px;
   
 }
@@ -313,6 +313,7 @@ font-size: 18px;
         align-items: center;
         padding: 5px 10px;
         width: 400px;
+        gap: .5rem;
       }
 
       
@@ -335,14 +336,16 @@ font-size: 18px;
 
 
       .timePickerContainer{
+        border-radius: 15px;
         display: flex;
-        width: 402px;
-      flex-direction: column;
+        align-items: center;
+        flex-direction: column;
+        opacity: 1;
+        width: 380px;
+        padding: 15px;
         gap: .7rem;
-        background-color: #1c1c1c;
-        padding: 30px;
-        border-radius: 5px;
-        
+        background-color: #214054;
+        animation: fadeIn 0.5s ease forwards;
     }
     
     .pickers {
@@ -403,12 +406,12 @@ font-size: 18px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: absolute;
-        bottom: 55px;
+        display: none;
+        bottom: 50px;
         width: 100%;
-        left: 0;
+        padding: 4px 0px;
         gap: .5rem;
-        background-color: #1c1c1c;
+        background-color: #214054;
       }
       
       .remainingTime {
@@ -445,7 +448,7 @@ font-size: 18px;
 
       .clock_mix {
         display: flex;
-        width: 83px;
+        width: 94px;
         justify-content: space-between;
       }
     
