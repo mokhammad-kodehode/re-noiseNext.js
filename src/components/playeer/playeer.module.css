@@ -1,15 +1,12 @@
 
 
 .media_section {
-    display: flex;
-    bottom: 0;
-    flex-direction: column;
-    z-index: 1;
-    align-items: center;
-    justify-content: flex-start;
-    width: 60%;
-    padding: 5px;
+   padding: 0;
   }
+
+.show {
+  padding: 5px;
+}
 
   .mixName{
     display: flex;
@@ -39,7 +36,8 @@ cursor: pointer;
     width: 850px;
     border-radius: 10px;
     position: relative;
-    background-color: #214054;
+    background-color: #215889;
+    margin-bottom: 7px;
 }
 
 
@@ -52,17 +50,13 @@ cursor: pointer;
 
 
 .timeLeftContainer {
-  display: flex;
-  flex-direction: column;
   text-align: center;
   bottom: 0px;
   right: 0;
   width: 400px;
   margin: auto;
-  gap: .5rem;
   padding: 5px;
   border-radius: 5px;
-  
 }
 
 .remainingTime {
@@ -151,7 +145,7 @@ font-size: 18px;
   cursor: pointer;
   border-radius: 5px;
   background-color: transparent;
-  border: 1px solid rgb(95, 95, 95);
+  border: 1px solid rgb(255, 255, 255);
   padding: 5px;
   transition: .2s;
   color: #ffffff;
@@ -161,9 +155,10 @@ font-size: 18px;
     font-size: 17px;
   cursor: pointer;
   border-radius: 5px;
-  background-color: #00465d;
+  background-color: rgb(255, 212, 133);
   border: 1px solid white;
   padding: 5px;
+  color: #215889;
   transform: scale(1.1);
   transition: .2s;
 }
@@ -182,7 +177,7 @@ font-size: 18px;
     width: 850px;
     padding: 15px;
     gap: .7rem;
-    background-color: #214054;
+    background-color: #215889;
     animation: fadeIn 0.5s ease forwards;
 }
 
@@ -402,11 +397,10 @@ font-size: 18px;
       }
 
       .timeLeftContainer {
-        display: flex;
+        display: none;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        display: none;
         bottom: 50px;
         width: 100%;
         padding: 4px 0px;

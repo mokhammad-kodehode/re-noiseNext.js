@@ -74,13 +74,13 @@ const Playeer: React.FC<PlayeerProps> = (
             }
           });
         }, 1000);
-      
+        closeTimePicker()
         setTimerIntervalId(intervalId);
       };
 
       const toggleTimePicker = () => {
         setIsTimePickerOpen(!isTimePickerOpen);
-        setIsTimeLeftContainerVisible(!isTimeLeftContainerVisible); 
+        setIsTimeLeftContainerVisible(true); 
       };
     
       const closeTimePicker = () => {
@@ -120,7 +120,8 @@ const Playeer: React.FC<PlayeerProps> = (
           setRemainingTime(0);
           setIsTimerRunning(false);
           setTimerIntervalId(null);
-          setIsTimeLeftContainerVisible(false)
+          setIsTimeLeftContainerVisible(true)
+          
         }
       };
 
@@ -183,10 +184,9 @@ const Playeer: React.FC<PlayeerProps> = (
                                         onChange={(e) => setSelectedTime(e.target.value)}
                                       />
                                   </div>
-                                  <button className={styles.startBtn} onClick={() => startTimerAtTime(selectedTime)}>Start</button>
                               </div >
-  
                         </div>
+                        <button className={styles.startBtn} onClick={() => startTimerAtTime(selectedTime)}>Start</button>
                       </div>
                     ) : null}
                <div className={styles.timeLeftContainer} style={{ display: isTimeLeftContainerVisible ? 'block' : 'none' }}>
