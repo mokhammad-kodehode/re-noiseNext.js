@@ -302,7 +302,6 @@ font-size: 18px;
 @media (max-width: 844px) { 
     .media_section {
         bottom: 0;
-        position: fixed;
         display: flex;
         flex-direction: column;
         z-index: 1;
@@ -340,7 +339,7 @@ font-size: 18px;
         width: 380px;
         padding: 15px;
         gap: .7rem;
-        background-color: #214054;
+        background-color: #215889;
         animation: fadeIn 0.5s ease forwards;
     }
     
@@ -406,7 +405,6 @@ font-size: 18px;
         width: 100%;
         padding: 4px 0px;
         gap: .5rem;
-        background-color: #214054;
       }
       
       .remainingTime {
