@@ -329,15 +329,14 @@ padding: 5px;
         max-width: 100%;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        height:100vh;
+        justify-content: flex-start;
+        height:calc(100vh - 48.8px) ;
         gap: 0rem;
     }
 
 
     .category {
         display: grid;
-        width: 400px;
         justify-content: center;
         align-items: center;
         grid-template-columns: auto auto auto auto;
@@ -367,10 +366,10 @@ padding: 5px;
         grid-template-columns: repeat(7, auto);;
         gap: .5rem;
         align-items: center;
-        justify-content: space-around;
+        justify-content: start;
         list-style-type: none;
         overflow: auto;
-        height: 100%;
+        height: 70%;
         padding: 0 5px;
     }
 
@@ -382,6 +381,20 @@ padding: 5px;
         width: 93px;
         gap:0;
         position: relative;
+    }
+
+    .sound_card_playing .button{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px rgb(255, 255, 255) solid;
+        border-radius: 50%;
+        transform: scale(1.1);
+        transition: 0.5s;
+        background-color: rgb(33, 88, 137);
+        padding: 5px;
+    
     }
 
     
@@ -408,8 +421,8 @@ padding: 5px;
     
     .container_mixes_anim  {
         display: flex;
-        /* position: fixed; */
-        bottom: 80px;
+        position: fixed;
+        bottom: 140px;
         left: 5px;
         flex-direction: column;
         align-items: center;
@@ -418,7 +431,7 @@ padding: 5px;
         gap: .5rem;
         width: 380px;
         opacity: 1;
-        height: 250px;
+        height: 75%;
         animation: fadeIn 0.5s ease forwards;
         transition: 1s ease;
     }
@@ -433,13 +446,12 @@ padding: 5px;
         width: 100%;
         padding: 15px 15px;
         border-radius: 5px;
-        height: 85%;
+        height: 90%;
         
     }
 
     .wrapper_mixes{
         padding: 5px;
-        border: 1px rgb(61, 61, 61) solid;
         height: 100%;
         width: 100%;
         border-radius: 10px;
@@ -466,7 +478,7 @@ padding: 5px;
         width: 70px;
         font-size: 12px;
         background-color: transparent;
-        border: 1px rgb(61, 61, 61) solid;
+        border: 1px rgb(255, 255, 255) solid;
         border-radius: 10px;
         transition: .5s;
         cursor: pointer;
@@ -530,7 +542,7 @@ padding: 5px;
         padding: 10px;
         transform: scale(1.1);
         transition: 0.5s;
-        background-color: black;
+        background-color: rgb(33, 88, 137);
         width: 60px;
         height: 60px;
     }
