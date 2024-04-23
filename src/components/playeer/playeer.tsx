@@ -121,7 +121,6 @@ const Playeer: React.FC<PlayeerProps> = (
           setIsTimerRunning(false);
           setTimerIntervalId(null);
           setIsTimeLeftContainerVisible(true)
-          
         }
       };
 
