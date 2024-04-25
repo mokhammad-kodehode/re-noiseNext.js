@@ -1,8 +1,5 @@
 .videoPlayer{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
+
 }
 
 .videoContainer {
@@ -21,20 +18,20 @@
 
 .media_section {
     display: flex;
-    bottom: 0;
-    flex-direction: column;
     z-index: 1;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    background-color: #1c1c1c;
-    padding: 5px;
+    width: 100%;;
+    padding: 1.4px;
+    position: fixed;
+    bottom: 0px;
   }
 
 
   
   .videoTitle {
     /* Ваши стили для заголовка */
+    display: none;
     color: white;
     padding: 10px;
     width: 150px;
@@ -48,19 +45,15 @@
     justify-content: space-between;
     padding: 0 15px;
     z-index: 1;
-    height: 55px;
-    width: 650px;
-    border: 1px rgb(61, 61, 61) solid;
+    height: 65px;
+    width: 850px;
     border-radius: 10px;
     position: relative;
+    background-color: #215889;
+    margin-bottom: 7px;
 }
 
-.volume {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .5rem;
-}
+
 
 
 .play {
@@ -69,6 +62,7 @@
   font-size: 34px;
   cursor: pointer;
 }
+
 
 .audio {
   display: none;
@@ -86,11 +80,12 @@ cursor: pointer;
 
 
 .volumeSlider {
-  width: 180px;
+  width: 440px;
   accent-color: #ffffff;
   height: 9px;
-  transition: 1s;
+  margin-left: 40px;
 }
+
 
 
 .clockIcon {

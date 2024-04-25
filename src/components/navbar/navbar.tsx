@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
                      <Link href="/soundPage" className={styles.nav_item}>Sounds</Link>
               </li>
               <li className={styles.nav_item}>
-                     <Link href="/videoPage" className={styles.nav_item}>Relax Video</Link>
+                     <Link href="/videoPage" className={styles.nav_item}>Backgrounds</Link>
               </li>
         </ul>
       </nav>

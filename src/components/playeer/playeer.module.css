@@ -37,7 +37,7 @@ cursor: pointer;
     width: 850px;
     border-radius: 10px;
     position: relative;
-    background-color: #215889;
+    background-color: hwb(208 13% 46%);
     margin-bottom: 7px;
 }
 
@@ -320,7 +320,7 @@ font-size: 18px;
     gap: 1rem;
     padding: 10px;
     z-index: 1;
-    height: 85px;
+    height: 5px;
     width: 100%;
 }
 

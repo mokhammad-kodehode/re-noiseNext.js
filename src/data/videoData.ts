@@ -11,7 +11,7 @@ export interface SoundData {
 
 const videoData :  {[key:string]: SoundData} = {
       bonfire: {
-        title: "Bonfire",
+        title: "Fireplace",
         soundSource: "sounds/bonfire.wav",
         videoSource: "videos/bonfire.mp4",
         imageSource: "images/fire.png",
