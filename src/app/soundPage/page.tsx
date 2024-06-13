@@ -13,7 +13,7 @@ const RelaxSoundsMap: React.FC = () => {
   const [mixName, setMixName] = useState<string>('');
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-
+  const [isLoading, setIsLoading] = useState(false);
 
 
   useEffect(() => {

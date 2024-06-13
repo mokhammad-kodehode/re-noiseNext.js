@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 50px;
+}
+
+.container ul {
+    list-style-type: circle;
+}
+
+
+.container h1 {
+    color: rgb(239, 239, 239);
+}
+
+.sleep_tips li{
+  color: rgb(255, 235, 203);
+  margin-top: 20px;
+  width: 750px;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.sleep_tips span{
+    font-weight: 500;
+  }

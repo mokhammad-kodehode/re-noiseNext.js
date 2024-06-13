@@ -6,13 +6,16 @@ const Navbar: React.FC = () => {
   return (
     <header>
       <nav className={styles.navbar}>
-          <Link className={styles.logo} href="/" >ReNoise</Link>
+          <Link className={styles.logo} href="/" >Replay Noise</Link>
         <ul className={styles.items}>
             <li className={styles.nav_item}>
                      <Link href="/soundPage" className={styles.nav_item}>Sounds</Link>
               </li>
               <li className={styles.nav_item}>
                      <Link href="/videoPage" className={styles.nav_item}>Backgrounds</Link>
+              </li>
+              <li className={styles.nav_item}>
+                     <Link href="/sleepTipsPage" className={styles.nav_item}>Sleeping and Contractions</Link>
               </li>
         </ul>
       </nav>

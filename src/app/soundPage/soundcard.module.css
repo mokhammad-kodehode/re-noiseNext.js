@@ -338,11 +338,11 @@ padding: 5px;
 
     .category {
         display: grid;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         grid-template-columns: auto auto auto auto;
         margin-top: 5px;
-        gap: 0rem;
+        width: 390px;
     }
     
     .category_btn {
@@ -360,6 +360,24 @@ padding: 5px;
         width: 75px;
         margin-left: 15px;
     }
+
+
+    .active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #215889;
+        border: 1px solid #FFFFFF;
+        color: #FFFFFF;
+        border-radius: 25px;
+        cursor: pointer;
+        transform: scale(1.1);
+        padding: 5px;
+        font-size: 12px;
+        transition: 0.2s ease-in;
+        width: 75px;
+    }
+    
     
     .sound_map {
         display: grid;
@@ -423,7 +441,7 @@ padding: 5px;
     .container_mixes_anim  {
         display: flex;
         position: fixed;
-        bottom: 140px;
+        bottom: 80px;
         left: 5px;
         flex-direction: column;
         align-items: center;
@@ -432,7 +450,7 @@ padding: 5px;
         gap: .5rem;
         width: 380px;
         opacity: 1;
-        height: 75%;
+        height: 80%;
         animation: fadeIn 0.5s ease forwards;
         transition: 1s ease;
     }
