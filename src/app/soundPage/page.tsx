@@ -13,7 +13,7 @@ const RelaxSoundsMap: React.FC = () => {
   const [mixName, setMixName] = useState<string>('');
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [loadingSounds, setLoadingSounds] = useState<{ [key: string]: boolean }>({});
+
 
 
 
@@ -42,8 +42,8 @@ const RelaxSoundsMap: React.FC = () => {
     stopAllSounds,
     toggleMix,
     activeMix,
-    toggleMixesContainer
-    
+    toggleMixesContainer,
+    loadingSounds, 
   } = useAudioContext();
 
   

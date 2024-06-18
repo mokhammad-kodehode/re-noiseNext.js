@@ -44,5 +44,6 @@ export interface SoundData {
     handleVolumeChange: (sound: SoundData, volume: number) => void;
     handleVolumeChangeAll: (volume: number) => void;
     handleMuteAll: () => void;
-    
+    loadingSounds: { [key: string]: boolean };
+    setLoadingSounds: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
   }
