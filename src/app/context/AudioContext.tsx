@@ -16,6 +16,8 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [activeMix, setActiveMix] = useState<string | null>(null);
   const [isMixesContainerOpen, setIsMixesContainerOpen] = useState(false);
+  const [loadingSounds, setLoadingSounds] = useState<{ [key: string]: boolean }>({});
+
   
 
   const toggleMixesContainer = () => {
@@ -100,33 +102,42 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
 
 
-  const handleSoundClick = (sound: SoundData) => {
-    let audioPlayer = audioPlayers[sound.title] || new Howl({
-      src: [sound.soundSource],
-      loop: true,
-      preload: true, // Добавьте атрибут preload для предварительной загрузки
-    });
+  const handleSoundClick = async (sound: SoundData) => {
+    try {
+      setLoadingSounds((prevState) => ({ ...prevState, [sound.title]: true }));
+      let audioPlayer = audioPlayers[sound.title] || new Howl({
+        src: [sound.soundSource],
+        loop: true,
+        preload: true,
+        onload: () => {
+          setLoadingSounds((prevState) => ({ ...prevState, [sound.title]: false }));
+        },
+        onloaderror: () => {
+          setLoadingSounds((prevState) => ({ ...prevState, [sound.title]: false }));
+        }
+      });
   
-    if (activeSounds.includes(sound.title)) {
-      audioPlayer.pause();
-      audioPlayer.seek(0); // Сброс времени воспроизведения
-      setActiveSounds((prevActiveSounds) => prevActiveSounds.filter((title) => title !== sound.title));
-    } else {
-      audioPlayer.play();
-      setActiveSounds((prevActiveSounds) => [...prevActiveSounds, sound.title]);
-      setMixName("")
+      if (activeSounds.includes(sound.title)) {
+        audioPlayer.pause();
+        audioPlayer.seek(0); // Reset playback time
+        setActiveSounds((prevActiveSounds) => prevActiveSounds.filter((title) => title !== sound.title));
+      } else {
+        audioPlayer.play();
+        setActiveSounds((prevActiveSounds) => [...prevActiveSounds, sound.title]);
+        setMixName("");
+      }
+  
+      setAudioPlayers((prevAudioPlayers) => ({
+        ...prevAudioPlayers,
+        [sound.title]: audioPlayer,
+      }));
+  
+      console.log(`Play/Stop: ${sound.title}`);
+    } catch (error) {
+      console.error("Error loading sound: ", error);
+      setLoadingSounds((prevState) => ({ ...prevState, [sound.title]: false }));
     }
-  
-    setAudioPlayers((prevAudioPlayers) => ({
-      ...prevAudioPlayers,
-      [sound.title]: audioPlayer,
-    }));
-
-    // Попытка возобновить звук в фоновом режиме
-  
-    console.log(`Play/Stop: ${sound.title}`);
   };
-
 
 
   const handlePlayPause = () => {
@@ -209,6 +220,7 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     handleVolumeChange,
     handleVolumeChangeAll,
     handleMuteAll,
+    loadingSounds,
   };
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;;

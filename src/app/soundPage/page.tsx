@@ -13,7 +13,8 @@ const RelaxSoundsMap: React.FC = () => {
   const [mixName, setMixName] = useState<string>('');
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadingSounds, setLoadingSounds] = useState<{ [key: string]: boolean }>({});
+
 
 
   useEffect(() => {
@@ -143,28 +144,30 @@ const RelaxSoundsMap: React.FC = () => {
                     onClick={() => setSelectedCategory("color")}>Color</button>
           </div>
           <ul className={styles.sound_map}>
-          {Object.keys(soundsData).map((key) => {
-              const sound = soundsData[key];
-              const isCurrentPlaying = activeSounds.includes(sound.title);
+              {Object.keys(soundsData).map((key) => {
+                const sound = soundsData[key];
+                const isCurrentPlaying = activeSounds.includes(sound.title);
+                const isLoading = loadingSounds[sound.title];
 
-              if (selectedCategory === "All" || sound.category.includes(selectedCategory)) {
-                return (
-                  <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
-                    <button className={styles.button} onClick={() => handleSoundClick(sound)}>
-                    {sound.color && (
-                        <span className={styles.colorIndicator} style={{ backgroundColor: sound.color }}></span>
-                      )}
-                      {sound.title === "Owl" && sound.imageSource && (
-                        <div className={styles.imageWrapper}>
-                          <Image src={sound.imageSource} alt={sound.title} width={45} height={43} />
-                        </div>
-                      )}
-                      {sound.title !== "Owl" && sound.icon && ( // Если не "Owl", используем иконку
-                        <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon} />
-                      )}
-                    </button>
-                    <p className={styles.name}>{sound.title}</p>
-                    {isCurrentPlaying && (
+                if (selectedCategory === "All" || sound.category.includes(selectedCategory)) {
+                  return (
+                    <li key={key} className={`${styles.sound_card} ${isCurrentPlaying ? styles.sound_card_playing : ''}`}>
+                      <button className={styles.button} onClick={() => handleSoundClick(sound)}>
+                        {sound.color && (
+                          <span className={styles.colorIndicator} style={{ backgroundColor: sound.color }}></span>
+                        )}
+                        {isLoading ? (
+                          <div className={styles.spinner}></div> // Add a spinner div here
+                        ) : sound.title === "Owl" && sound.imageSource ? (
+                          <div className={styles.imageWrapper}>
+                            <Image src={sound.imageSource} alt={sound.title} width={45} height={43} />
+                          </div>
+                        ) : sound.icon && (
+                          <FontAwesomeIcon className={styles.icon} aria-hidden="true" icon={sound.icon} />
+                        )}
+                      </button>
+                      <p className={styles.name}>{sound.title}</p>
+                      {isCurrentPlaying && !isLoading && (
                         <input
                           className={styles.slider}
                           type="range"
@@ -175,13 +178,13 @@ const RelaxSoundsMap: React.FC = () => {
                           onChange={(e) => handleVolumeChange(sound, parseFloat(e.target.value))}
                         />
                       )}
-                  </li>
-                );
-              } else {
-                return null; // Не отображаем звуки, которые не соответствуют выбранной категории
-            }
-            })}
-          </ul>
+                    </li>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            </ul>
           <div className={styles.for_container_mixes}>
               {isMixesContainerOpen && <div className={`${styles.container_mixes} ${isMixesContainerOpen ? styles.container_mixes_anim : ""}`}>
                 <div className={styles.wrapper_mixes}>
