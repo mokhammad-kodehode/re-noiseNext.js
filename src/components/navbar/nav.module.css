@@ -1,68 +1,88 @@
+/* Общие стили */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    background-color: #215889;
-    /* box-shadow: 0px 0px 5px 1px #000000; */
-    border-bottom: 2px solid white;
-    z-index: 1;
-    padding: 5px 25px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:20px;
+  position: fixed;
+  z-index: 10;
+}
 
-  .logo {
-    color: white;
-    text-decoration: none;
-    font-size: 28px;
-    left: 20px;
-  }
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+}
 
-  .items {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 2rem;
-    list-style-type: none;
+/* Бургер меню */
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 11;
+}
 
-  }
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
 
-  .item {
-    white-space: nowrap;
-  }
+.line.open:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
 
-  @media (max-width: 844px) {
-    
-  .logo {
-    color: white;
-    text-decoration: none;
-    font-size: 22px;
-    left: 20px;
-  }
+.line.open:nth-child(2) {
+  opacity: 0;
+}
 
-  .navbar {
-    background-color: #215889;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw;
-    position: relative;
-    /* box-shadow: 0px 0px 11px 3px #000000; */
-    z-index: 1;
-    padding: 10px 10px;
-  }
+.line.open:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
 
+/* Меню */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
 
-  .items {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: .7rem;
-    list-style-type: none;
+.menu.show {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
 
-  }
+.menuList {
+  list-style: none;
+  text-align: center;
+}
 
-  .item {
-    white-space: nowrap;
-  }
+.menuItem {
+  margin: 20px 0;
+}
 
-  }
+.menuItem a {
+  color: #fff;
+  font-size: 2rem;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.menuItem a:hover {
+  color: #742f8b;
+}

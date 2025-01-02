@@ -306,9 +306,10 @@ font-size: 18px;
         flex-direction: column;
         z-index: 1;
         align-items: center;
-        padding: 5px 10px;
+        justify-content: center;
+        padding: 5px 3px;
         position: fixed;
-        width: 400px;
+        width: 100%;
         gap: .5rem;
       }
 

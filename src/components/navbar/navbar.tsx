@@ -1,26 +1,40 @@
+"use client"
+
 import React from 'react';
 import styles from './nav.module.css'; 
 import Link from 'next/link';
+import { useState } from "react";
 
 const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <header>
-      <nav className={styles.navbar}>
-          <Link className={styles.logo} href="/" >Replay Noise</Link>
-        <ul className={styles.items}>
-            <li className={styles.nav_item}>
-                     <Link href="/soundPage" className={styles.nav_item}>Sounds</Link>
+    <div className={styles.navbar}>
+      <button className={styles.burger} onClick={toggleMenu}>
+        <div className={`${styles.line} ${isOpen ? styles.open : ""}`}></div>
+        <div className={`${styles.line} ${isOpen ? styles.open : ""}`}></div>
+        <div className={`${styles.line} ${isOpen ? styles.open : ""}`}></div>
+      </button>
+
+      <div className={`${styles.menu} ${isOpen ? styles.show : ""}`}>
+        <ul className={styles.menuList}>
+        <li className={styles.menuItem}>
+                     <Link href="/soundPage" >Sounds</Link>
               </li>
-              <li className={styles.nav_item}>
-                     <Link href="/videoPage" className={styles.nav_item}>Backgrounds</Link>
+              <li className={styles.menuItem}>
+                     <Link href="/videoPage" >Backgrounds</Link>
               </li>
-              <li className={styles.nav_item}>
-                     <Link href="/sleepTipsPage" className={styles.nav_item}>Sleeping and Contractions</Link>
+              <li className={styles.menuItem}>
+                     <Link href="/sleepTipsPage" >Sleeping and Contractions</Link>
               </li>
         </ul>
-      </nav>
-    </header>
+      </div>
+    </div>
   );
 };
 
-export default Navbar
+export default Navbar;

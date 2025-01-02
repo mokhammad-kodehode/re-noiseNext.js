@@ -4,7 +4,8 @@
     flex-direction: column;
     align-items: center;
     justify-content:space-between;
-    height:calc(100vh - 45px) ;
+    height:100vh ;
+    padding: 10px 0 0px 0;
     /* background-color: #215889; */
     /* background-image: linear-gradient(to bottom, #215889,#194469, #1c1c1c); */
    
@@ -355,8 +356,8 @@ padding: 5px;
         justify-content: space-around;
         align-items: center;
         grid-template-columns: auto auto auto auto;
-        margin-top: 5px;
-        width: 390px;
+        margin-top: 25px;
+        width: 100%;
     }
     
     .category_btn {
@@ -374,6 +375,10 @@ padding: 5px;
         width: 75px;
         margin-left: 15px;
     }
+
+    .for_container_mixes {
+
+        }
 
 
     .active {
@@ -396,13 +401,13 @@ padding: 5px;
     .sound_map {
         display: grid;
         width: 100%;
-        grid-template-columns: repeat(7, auto);;
+        grid-template-columns: repeat(  5 , auto);;
         gap: .5rem;
         align-items: center;
         justify-content: start;
         list-style-type: none;
         overflow: auto;
-        height: 70%;
+        height: 100%;
         padding: 0 5px;
     }
 
@@ -444,7 +449,7 @@ padding: 5px;
         padding: 5px;
         gap: .5rem;
         height: 100%;
-        width: 390px;
+        width: 100%;
         opacity: 0;
         left: 0;
         overflow: hidden;
@@ -456,15 +461,15 @@ padding: 5px;
         display: flex;
         position: fixed;
         bottom: 80px;
-        left: 5px;
+        left: 0px;
         flex-direction: column;
         align-items: center;
         background-color: rgb(33, 88, 137);
         padding: 10px 5px;
         gap: .5rem;
-        width: 380px;
+        width: 100%;
         opacity: 1;
-        height: 80%;
+        height: 85%;
         animation: fadeIn 0.5s ease forwards;
         transition: 1s ease;
     }
@@ -581,7 +586,7 @@ padding: 5px;
     }
     
     .icon {
-        font-size: 32px;
+        font-size: 26px;
         color: #FFFFFF;
     }
     
@@ -591,8 +596,8 @@ padding: 5px;
         border: 2px #FFFFFF solid;
         border-radius: 50%;
         padding: 10px;
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         cursor: pointer;
     }
     
