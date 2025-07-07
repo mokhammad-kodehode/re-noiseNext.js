@@ -129,7 +129,7 @@ const soundsData :  {[key:string]: SoundData} = {
       },
       windcold: {
         title: "Wind Storm Cold",
-        soundSource: "sounds/windcold.wav",
+        soundSource: "sounds/windcold.mp3",
         videoSource: "Video/thunder.mp4",
         imageSource: "images/thunder.jpg",
         icon: faWind,
