@@ -1,213 +1,163 @@
-"use client"
-import React, { createContext, useContext, useState,  } from 'react';
-import { Howl, Howler } from 'howler';
-import { SoundData } from './AudioContextTypes';
-import { MixData } from './AudioContextTypes';
-import { AudioContextType } from './AudioContextTypes';
-import soundsData from '@/data/soundData';
+"use client";
 
+import React, { createContext, useContext, useState } from "react";
+import { Howl } from "howler";
+
+import soundsData from "@/data/soundData";
+import {
+  SoundData,
+  MixData,
+  AudioContextType,
+} from "./AudioContextTypes";
+
+/* ---------- Создаём контекст ---------- */
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
 
-export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+/* ---------- Провайдер ---------- */
+export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [audioPlayers, setAudioPlayers] = useState<Record<string, Howl>>({});
   const [activeSounds, setActiveSounds] = useState<string[]>([]);
   const [savedSounds, setSavedSounds] = useState<string[]>([]);
-  const [mixName, setMixName] = useState<string>('');
+  const [mixName, setMixName] = useState<string>("");
   const [savedMixes, setSavedMixes] = useState<string[]>([]);
   const [activeMix, setActiveMix] = useState<string | null>(null);
   const [isMixesContainerOpen, setIsMixesContainerOpen] = useState(false);
-  const [loadingSounds, setLoadingSounds] = useState<{ [key: string]: boolean }>({});
+  const [loadingSounds, setLoadingSounds] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
-  
-
+  /* ---------- helpers ---------- */
   const toggleMixesContainer = () => {
     setIsMixesContainerOpen(!isMixesContainerOpen);
   };
 
-
+  const stopAllSounds = () => {
+    Object.values(audioPlayers).forEach((player) => {
+      if (player) {
+        player.stop();
+        player.seek(0);
+      }
+    });
+    setActiveSounds([]);
+    console.log("All sounds stopped");
+  };
 
   const loadMix = (mixName: string) => {
     try {
-      const storedMixes = localStorage.getItem('mixes');
-      const mixes = storedMixes ? JSON.parse(storedMixes) as MixData[] : [];
-      const mixToLoad = mixes.find(mix => mix.mixName === mixName);
-  
+      const storedMixes = localStorage.getItem("mixes");
+      const mixes = storedMixes ? (JSON.parse(storedMixes) as MixData[]) : [];
+      const mixToLoad = mixes.find((m) => m.mixName === mixName);
+
       if (mixToLoad) {
         stopAllSounds();
         setActiveSounds(mixToLoad.activeSounds);
-  
-        mixToLoad.activeSounds.forEach(title => {
-          // Находим соответствующий звук в soundsData по его заголовку
-          const soundData = Object.values(soundsData).find(sound => sound.title === title);
-  
-          if (soundData) {
-            let audioPlayer = audioPlayers[title] || new Howl({
+
+        mixToLoad.activeSounds.forEach((title) => {
+          const soundData = Object.values(soundsData).find(
+            (s) => s.title === title
+          );
+          if (!soundData) return console.error(`No sound "${title}" in data`);
+
+          let player =
+            audioPlayers[title] ||
+            new Howl({
               src: [soundData.soundSource],
               loop: true,
               preload: true,
             });
-  
-            // Установка громкости
-            audioPlayer.volume(mixToLoad.volumes[title] || 0);
-  
-            // Воспроизведение
-            audioPlayer.play();
-  
-            setAudioPlayers(prevAudioPlayers => ({
-              ...prevAudioPlayers,
-              [title]: audioPlayer,
-            }));
-          } else {
-            console.error(`Звук с названием "${title}" отсутствует в данных`);
-          }
+
+          player.volume(mixToLoad.volumes[title] ?? 0);
+          player.play();
+
+          setAudioPlayers((prev) => ({ ...prev, [title]: player }));
         });
       }
-    } catch (error) {
-      console.error("Ошибка при загрузке микса: ", error);
-      // Дополнительные действия при ошибке
+    } catch (err) {
+      console.error("loadMix error:", err);
     }
-  }
+  };
 
-  const toggleMix = (mixName: string) => {
-    if (activeMix === mixName) {
+  const toggleMix = (name: string) => {
+    if (activeMix === name) {
       stopAllSounds();
       setActiveMix(null);
     } else {
-      // Сохранение текущего активного микса
       setSavedSounds(activeSounds);
-  
-      if (activeSounds.length > 0) {
-        // Остановка всех текущих звуков, если они играют
-        stopAllSounds();
-      }
-  
-      // Воспроизведение нового микса
-      loadMix(mixName);
-      setActiveMix(mixName);
+      if (activeSounds.length) stopAllSounds();
+      loadMix(name);
+      setActiveMix(name);
     }
   };
-  
-  
 
-  const stopAllSounds = () => {
-    Object.values(audioPlayers).forEach((audioPlayer) => {
-      if (audioPlayer) {
-        audioPlayer.stop();
-        audioPlayer.seek(0); // Сброс времени воспроизведения
-      }
-    });
-    setActiveSounds([]);
-    console.log('All sounds stopped');
-  };
-
-
-
+  /* ---------- обработчики звука ---------- */
   const handleSoundClick = (sound: SoundData) => {
-    // Проверка, был ли звук ранее загружен
     if (!audioPlayers[sound.title]) {
-      setLoadingSounds((prevLoadingSounds) => ({
-        ...prevLoadingSounds,
-        [sound.title]: true,
-      }));
-  
-      const audioPlayer = new Howl({
+      setLoadingSounds((p) => ({ ...p, [sound.title]: true }));
+
+      const player = new Howl({
         src: [sound.soundSource],
         loop: true,
         preload: true,
-        onload: () => {
-          setLoadingSounds((prevLoadingSounds) => ({
-            ...prevLoadingSounds,
-            [sound.title]: false,
-          }));
-        },
+        onload: () =>
+          setLoadingSounds((p) => ({ ...p, [sound.title]: false })),
       });
-  
-      audioPlayer.play();
-  
-      setAudioPlayers((prevAudioPlayers) => ({
-        ...prevAudioPlayers,
-        [sound.title]: audioPlayer,
-      }));
-  
-      setActiveSounds((prevActiveSounds) => [...prevActiveSounds, sound.title]);
+
+      player.play();
+
+      setAudioPlayers((prev) => ({ ...prev, [sound.title]: player }));
+      setActiveSounds((prev) => [...prev, sound.title]);
     } else {
-      const audioPlayer = audioPlayers[sound.title];
-  
+      const player = audioPlayers[sound.title];
       if (activeSounds.includes(sound.title)) {
-        audioPlayer.pause();
-        setActiveSounds((prevActiveSounds) => prevActiveSounds.filter((title) => title !== sound.title));
+        player.pause();
+        setActiveSounds((prev) =>
+          prev.filter((title) => title !== sound.title)
+        );
       } else {
-        audioPlayer.play();
-        setActiveSounds((prevActiveSounds) => [...prevActiveSounds, sound.title]);
+        player.play();
+        setActiveSounds((prev) => [...prev, sound.title]);
       }
     }
-  
     setMixName("");
-    console.log(`Play/Stop: ${sound.title}`);
   };
-
 
   const handlePlayPause = () => {
-    const isAnyPlaying = activeSounds.length > 0;
-
-    if (isAnyPlaying) {
-
+    const anyPlaying = activeSounds.length > 0;
+    if (anyPlaying) {
       setSavedSounds(activeSounds);
-
-      activeSounds.forEach((title) => {
-        const audioPlayer = audioPlayers[title];
-        audioPlayer.pause();
-        audioPlayer.seek(0);
+      activeSounds.forEach((t) => {
+        audioPlayers[t].pause();
+        audioPlayers[t].seek(0);
       });
-
       setActiveSounds([]);
     } else {
-
       setActiveSounds(savedSounds);
-
-      savedSounds.forEach((title) => {
-        const audioPlayer = audioPlayers[title];
-        audioPlayer.play();
-      });
+      savedSounds.forEach((t) => audioPlayers[t].play());
     }
   };
 
-  const handleVolumeChange = (sound: SoundData, volume: number) => {
-    const audioPlayer = audioPlayers[sound.title];
-  
-    if (audioPlayer) {
-      audioPlayer.volume(volume);
-  
-      setAudioPlayers((prevAudioPlayers) => ({
-        ...prevAudioPlayers,
-        [sound.title]: audioPlayer,
-      }));
+  const handleVolumeChange = (sound: SoundData, v: number) => {
+    const player = audioPlayers[sound.title];
+    if (player) {
+      player.volume(v);
+      setAudioPlayers((p) => ({ ...p, [sound.title]: player }));
     }
   };
 
-  const handleVolumeChangeAll = (volume: number) => {
-    // Реализация вашей логики для изменения громкости всех звуков
-    activeSounds.forEach((title) => {
-      const audioPlayer = audioPlayers[title];
-      if (audioPlayer) {
-        audioPlayer.volume(volume);
-      }
-    });
-  };
-  
-  const handleMuteAll = () => {
-    activeSounds.forEach((title) => {
-      const audioPlayer = audioPlayers[title];
-      if (audioPlayer) {
-        audioPlayer.volume(0);
-      }
-    });
-  };
-  const value = {
+  const handleVolumeChangeAll = (v: number) =>
+    activeSounds.forEach((t) => audioPlayers[t]?.volume(v));
+
+  const handleMuteAll = () =>
+    activeSounds.forEach((t) => audioPlayers[t]?.volume(0));
+
+  /* ---------- value контекста ---------- */
+  const value: AudioContextType = {
     audioPlayers,
     setAudioPlayers,
     activeSounds,
-    setActiveSounds,
+    setActiveSounds,       // ★ важное добавление
     savedSounds,
     setSavedSounds,
     mixName,
@@ -231,13 +181,15 @@ export const AudioContextProvider: React.FC<{ children: React.ReactNode }> = ({ 
     setLoadingSounds,
   };
 
-  return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>;;
+  return (
+    <AudioContext.Provider value={value}>{children}</AudioContext.Provider>
+  );
 };
 
+/* ---------- Хук доступа ---------- */
 export const useAudioContext = () => {
-  const context = useContext(AudioContext);
-  if (context === undefined) {
-    throw new Error('useAudioContext must be used within an AudioContextProvider');
-  }
-  return context;
+  const ctx = useContext(AudioContext);
+  if (!ctx)
+    throw new Error("useAudioContext must be used within an AudioContextProvider");
+  return ctx;
 };
